@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.131.0">
+    <meta name="generator" content="Hugo 0.132.0">
     <meta name="generator" content="Relearn 6.1.1+tip">
     <meta name="description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
@@ -34,7 +34,7 @@ paste it in your .">
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
 Editor integration vim Graciously supplied by David Lukes:
 paste it in your .">
-    <meta itemprop="wordCount" content="1435">
+    <meta itemprop="wordCount" content="1304">
     <meta itemprop="keywords" content="Citation Keys,Overleaf,Cite as You Write">
     <title>Cite as you Write :: Better BibTeX for Zotero</title><link rel="icon" href="/zotero-better-bibtex/better-bibtex.ico" type="image/x-icon">
 
@@ -176,23 +176,6 @@ paste it in your .">
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">noremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">z</span> &#34;=<span style="color:#a6e22e">ZoteroCite</span>()&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#a6e22e">p</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">inoremap</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">z</span>&gt; &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">r</span>&gt;=<span style="color:#a6e22e">ZoteroCite</span>()&lt;<span style="color:#a6e22e">CR</span>&gt;</span></span></code></pre></div><p>This inserts the citation at the cursor using the shortcut ctrl-z (in insert mode) or <code>&lt;leader&gt;</code>z (in normal, visual etc. modes, <code>&lt;leader&gt;</code> being backslash by default).</p>
-<p>Alternatively, if you use a recent version of Vim (not Neovim) and have written your config file in <code>vim9script</code>, you may be interested in a <code>vim9script</code> version of the above solution to take advantage of JIT compilation:</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">def</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">ZoteroCite</span>(): <span style="color:#a6e22e">string</span>
-</span></span><span style="display:flex;"><span>    # <span style="color:#a6e22e">Pick</span> <span style="color:#a6e22e">a</span> <span style="color:#a6e22e">citation</span> <span style="color:#a6e22e">format</span> <span style="color:#a6e22e">based</span> <span style="color:#a6e22e">on</span> <span style="color:#a6e22e">the</span> <span style="color:#66d9ef">filetype</span> (<span style="color:#a6e22e">feel</span> <span style="color:#a6e22e">free</span> <span style="color:#a6e22e">to</span> <span style="color:#a6e22e">customize</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">var</span> <span style="color:#a6e22e">format</span>: <span style="color:#a6e22e">string</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> &amp;<span style="color:#66d9ef">filetype</span> =~ <span style="color:#e6db74">&#39;.*tex&#39;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">format</span> = <span style="color:#e6db74">&#39;cite&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">format</span> = <span style="color:#e6db74">&#39;pandoc&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    # <span style="color:#a6e22e">Make</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">BetterBibTeX</span> <span style="color:#a6e22e">API</span> <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">and</span> <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">the</span> <span style="color:#a6e22e">result</span>.
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">var</span> <span style="color:#a6e22e">api_call</span> = <span style="color:#e6db74">&#39;http://127.0.0.1:23119/better-bibtex/cayw?format=&#39;</span> .. <span style="color:#a6e22e">format</span> .. <span style="color:#e6db74">&#39;&amp;brackets=1&#39;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">var</span> <span style="color:#a6e22e">citation</span> = <span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#39;curl -s &#39;</span> .. <span style="color:#a6e22e">shellescape</span>(<span style="color:#a6e22e">api_call</span>))
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">citation</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">enddef</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">inoremap</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">x</span>&gt;&lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">z</span>&gt; &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">r</span>&gt;=<span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">ZoteroCite</span>()&lt;<span style="color:#a6e22e">cr</span>&gt;</span></span></code></pre></div><p>In this case, the keybinding Ctrl-X Ctrl-Z in insert mode inserts a Zotero citation. You can add a normal-mode keybinding in the same way as for the legacy VimScript version provided above.</p>
 <h3 id="emacs">emacs</h3>
 <p>@newhallroad wrote a function in elisp, which brings up the CAYW input, adds the chosen items as pandoc citations to the buffer, and moves the point to after the citations. This is for markdown-mode. Emacs users who use org-mode may (or may not) need something different.</p>
 <div class="highlight wrap-code"><pre tabindex="0"><code>(defun alk/bbt-zotero-insert-key ()
