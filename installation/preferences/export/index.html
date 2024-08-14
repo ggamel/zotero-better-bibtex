@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.132.0">
+    <meta name="generator" content="Hugo 0.132.1">
     <meta name="generator" content="Relearn 6.1.1+tip">
     <meta name="description" content="The Better BibTeX Configuration can be found under the regular Zotero preferences pane, tab ‘Better BibTeX’.
 The configuration of Better BibTeX is a little baroque compared to the standard Zotero Bib(La)TeX exporters (which only have hidden preferences). The defaults should just work, but here’s an attempt to describe what they do.
@@ -31,7 +31,7 @@ Making any change here will drop your entire export cache. This is usually not a
     <meta itemprop="description" content="The Better BibTeX Configuration can be found under the regular Zotero preferences pane, tab ‘Better BibTeX’.
 The configuration of Better BibTeX is a little baroque compared to the standard Zotero Bib(La)TeX exporters (which only have hidden preferences). The defaults should just work, but here’s an attempt to describe what they do.
 Making any change here will drop your entire export cache. This is usually not a problem unless you have a really large library, but you can read about what is involved here.">
-    <meta itemprop="wordCount" content="1367">
+    <meta itemprop="wordCount" content="1368">
     <meta itemprop="keywords" content="Automatic Export,Configuration,Export,Preferences">
     <title>Export :: Better BibTeX for Zotero</title><link rel="icon" href="/zotero-better-bibtex/better-bibtex.ico" type="image/x-icon">
 
@@ -118,10 +118,8 @@ Making any change here will drop your entire export cache. This is usually not a
     </li>
     <li><a href="#fields">Fields</a>
       <ul>
-        <li><a href="#export-language-as">Export language as</a></li>
-        <li><a href="#when-an-item-has-both-a-doi-and-a-url-export">When an item has both a DOI and a URL, export</a></li>
         <li><a href="#fields-to-omit-from-export-comma-separated">Fields to omit from export (comma-separated)</a></li>
-        <li><a href="#include-jabref-specific-metadata">Include JabRef-specific metadata:</a></li>
+        <li><a href="#bibtexbiblatex">BibTeX/BibLaTeX</a></li>
       </ul>
     </li>
     <li><a href="#quick-copy">Quick-Copy</a>
@@ -229,7 +227,11 @@ This biblatex has a new (less ambiguous) way to store creator names. It&rsquo;s 
 superior, but the LaTeX world moves slowly, so many people won&rsquo;t have it yet. But if you&rsquo;re an early adopter,
 you can enable it here</p>
 <h2 id="fields">Fields</h2>
-<h3 id="export-language-as">Export language as</h3>
+<h3 id="fields-to-omit-from-export-comma-separated">Fields to omit from export (comma-separated)</h3>
+<p>default: <code>&lt;not set&gt;</code></p>
+<p>If there are some fields you don&rsquo;t want in your bibtex files (such as <code>note</code> for example), add a list of them here, separated by comma&rsquo;s.</p>
+<h3 id="bibtexbiblatex">BibTeX/BibLaTeX</h3>
+<h4 id="export-language-as">Export language as</h4>
 <p>default: <code>langid</code></p>
 <p>Export either langid, language or both fields based on the item language (if any).</p>
 <p>Options:</p>
@@ -238,7 +240,7 @@ you can enable it here</p>
 <li>language</li>
 <li>both</li>
 </ul>
-<h3 id="when-an-item-has-both-a-doi-and-a-url-export">When an item has both a DOI and a URL, export</h3>
+<h4 id="when-an-item-has-both-a-doi-and-a-url-export">When an item has both a DOI and a URL, export</h4>
 <p>default: <code>both</code></p>
 <p>Does what it says on the tin, really. If an item has both a DOI and an URL, you can choose to have them both exported, or either one of them. Note that for BibTeX,
 you must load the <code>url</code> package when you have <code>doi</code> or <code>url</code> fields. <code>doi</code> and <code>url</code> fields are so-called <code>verbatim</code> fields with different escaping rules, and
@@ -249,10 +251,7 @@ BibTeX compilation will likely error out without the package loaded.</p>
 <li>DOI</li>
 <li>URL</li>
 </ul>
-<h3 id="fields-to-omit-from-export-comma-separated">Fields to omit from export (comma-separated)</h3>
-<p>default: <code>&lt;not set&gt;</code></p>
-<p>If there are some fields you don&rsquo;t want in your bibtex files (such as <code>note</code> for example), add a list of them here, separated by comma&rsquo;s.</p>
-<h3 id="include-jabref-specific-metadata">Include JabRef-specific metadata:</h3>
+<h4 id="include-jabref-specific-metadata">Include JabRef-specific metadata:</h4>
 <p>default: <code>0</code></p>
 <p>Export JabRef-specific fields: timestamps, titles for attachments, and groups for each collection an item is part of. Note that having this on will disable caching in exports, which is really undesirable specifically for auto-exports.</p>
 <p>Options:</p>
