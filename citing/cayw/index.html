@@ -3,26 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.133.1">
+    <meta name="generator" content="Hugo 0.134.0">
     <meta name="generator" content="Relearn 6.2.0+tip">
     <meta name="description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
-Editor integration vim Graciously supplied by David Lukes:
-paste it in your .">
+Editor integration vim Graciously supplied by David Lukes:">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Cite as you Write :: Better BibTeX for Zotero">
     <meta name="twitter:description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
-Editor integration vim Graciously supplied by David Lukes:
-paste it in your .">
+Editor integration vim Graciously supplied by David Lukes:">
     <meta property="og:url" content="/zotero-better-bibtex/citing/cayw/index.html">
     <meta property="og:site_name" content="Better BibTeX for Zotero">
     <meta property="og:title" content="Cite as you Write :: Better BibTeX for Zotero">
     <meta property="og:description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
-Editor integration vim Graciously supplied by David Lukes:
-paste it in your .">
+Editor integration vim Graciously supplied by David Lukes:">
     <meta property="og:locale" content="en">
     <meta property="og:type" content="article">
     <meta property="article:section" content="Citation Keys">
@@ -32,8 +29,7 @@ paste it in your .">
     <meta itemprop="name" content="Cite as you Write :: Better BibTeX for Zotero">
     <meta itemprop="description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
-Editor integration vim Graciously supplied by David Lukes:
-paste it in your .">
+Editor integration vim Graciously supplied by David Lukes:">
     <meta itemprop="wordCount" content="1435">
     <meta itemprop="keywords" content="Citation Keys,Overleaf,Cite as You Write">
     <title>Cite as you Write :: Better BibTeX for Zotero</title><link rel="icon" href="/zotero-better-bibtex/better-bibtex.ico" type="image/x-icon">
@@ -221,42 +217,42 @@ paste it in your .">
 <p>BBT exposes an URL at http://127.0.0.1:23119/better-bibtex/cayw <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. The url accepts
 the following URL parameters:</p>
 <table>
-<thead>
-<tr>
-<th>parameter</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>probe</code></td>
-<td>If set to any non-empty value, returns <code>ready</code>. You can use this to test whether BBT CAYW picking is live; it will not pop up the picker</td>
-</tr>
-<tr>
-<td><code>format</code></td>
-<td>Set the output format</td>
-</tr>
-<tr>
-<td><code>clipboard</code></td>
-<td>Any non-empty value will copy the results to the clipboard</td>
-</tr>
-<tr>
-<td><code>minimize</code></td>
-<td>Any non-empty value will minimize Zotero windows after a pick</td>
-</tr>
-<tr>
-<td><code>texstudio</code></td>
-<td>Any non-empty value will try to push the pick to TeXstudio</td>
-</tr>
-<tr>
-<td><code>selected</code></td>
-<td>Any non-empty value will use the current selection in Zotero rather than popping up the pick window</td>
-</tr>
-<tr>
-<td><code>select</code></td>
-<td>More of a gimmick than anything else, but if you add select=true, BBT will select the picked items in Zotero.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">parameter</th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>probe</code></td>
+          <td style="text-align: left">If set to any non-empty value, returns <code>ready</code>. You can use this to test whether BBT CAYW picking is live; it will not pop up the picker</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>format</code></td>
+          <td style="text-align: left">Set the output format</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>clipboard</code></td>
+          <td style="text-align: left">Any non-empty value will copy the results to the clipboard</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>minimize</code></td>
+          <td style="text-align: left">Any non-empty value will minimize Zotero windows after a pick</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>texstudio</code></td>
+          <td style="text-align: left">Any non-empty value will try to push the pick to TeXstudio</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>selected</code></td>
+          <td style="text-align: left">Any non-empty value will use the current selection in Zotero rather than popping up the pick window</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>select</code></td>
+          <td style="text-align: left">More of a gimmick than anything else, but if you add select=true, BBT will select the picked items in Zotero.</td>
+      </tr>
+  </tbody>
 </table>
 <p>The following formats are available:</p>
 <ul>
@@ -297,30 +293,30 @@ the following URL parameters:</p>
 <p>The <code>eta</code> formatter is great for experimentation, but if you need a format for a common target application, feel free to request a change to have that added to this list.</p>
 <p>The picker passes the following data along with your picked items if you filled them out:</p>
 <table>
-<thead>
-<tr>
-<th>field</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>locator</code></td>
-<td>the place within the work (e.g. page number)</td>
-</tr>
-<tr>
-<td><code>prefix</code></td>
-<td>for stuff like &ldquo;see &hellip;&rdquo;</td>
-</tr>
-<tr>
-<td><code>suffix</code></td>
-<td>for stuff after the citations</td>
-</tr>
-<tr>
-<td><code>suppress author</code></td>
-<td>if you only want the year</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">field</th>
+          <th style="text-align: left"></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><code>locator</code></td>
+          <td style="text-align: left">the place within the work (e.g. page number)</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>prefix</code></td>
+          <td style="text-align: left">for stuff like &ldquo;see &hellip;&rdquo;</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>suffix</code></td>
+          <td style="text-align: left">for stuff after the citations</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><code>suppress author</code></td>
+          <td style="text-align: left">if you only want the year</td>
+      </tr>
+  </tbody>
 </table>
 <p>However not all output formats support these. Pandoc and scannable cite are the richest ones, supporting all 4. MultiMarkdown supports
 none. The <code>formatted-</code> formats will ignore these. LaTeX supports all 4, in a way:</p>
@@ -337,102 +333,102 @@ command is generated</li>
 </ul>
 <p>Some of the formatters use abbreviated labels for the results if you include a locator. The defaults are:</p>
 <table>
-<thead>
-<tr>
-<th>locator label</th>
-<th>abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>article</td>
-<td>art.</td>
-</tr>
-<tr>
-<td>chapter</td>
-<td>ch.</td>
-</tr>
-<tr>
-<td>subchapter</td>
-<td>subch.</td>
-</tr>
-<tr>
-<td>column</td>
-<td>col.</td>
-</tr>
-<tr>
-<td>figure</td>
-<td>fig.</td>
-</tr>
-<tr>
-<td>line</td>
-<td>l.</td>
-</tr>
-<tr>
-<td>note</td>
-<td>n.</td>
-</tr>
-<tr>
-<td>issue</td>
-<td>no.</td>
-</tr>
-<tr>
-<td>opus</td>
-<td>op.</td>
-</tr>
-<tr>
-<td>page</td>
-<td>p.</td>
-</tr>
-<tr>
-<td>paragraph</td>
-<td>para.</td>
-</tr>
-<tr>
-<td>subparagraph</td>
-<td>subpara.</td>
-</tr>
-<tr>
-<td>part</td>
-<td>pt.</td>
-</tr>
-<tr>
-<td>rule</td>
-<td>r.</td>
-</tr>
-<tr>
-<td>section</td>
-<td>sec.</td>
-</tr>
-<tr>
-<td>subsection</td>
-<td>subsec.</td>
-</tr>
-<tr>
-<td>Section</td>
-<td>Sec.</td>
-</tr>
-<tr>
-<td>sub verbo</td>
-<td>sv.</td>
-</tr>
-<tr>
-<td>schedule</td>
-<td>sch.</td>
-</tr>
-<tr>
-<td>title</td>
-<td>tit.</td>
-</tr>
-<tr>
-<td>verse</td>
-<td>vrs.</td>
-</tr>
-<tr>
-<td>volume</td>
-<td>vol.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th style="text-align: left">locator label</th>
+          <th style="text-align: left">abbreviation</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">article</td>
+          <td style="text-align: left">art.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">chapter</td>
+          <td style="text-align: left">ch.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">subchapter</td>
+          <td style="text-align: left">subch.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">column</td>
+          <td style="text-align: left">col.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">figure</td>
+          <td style="text-align: left">fig.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">line</td>
+          <td style="text-align: left">l.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">note</td>
+          <td style="text-align: left">n.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">issue</td>
+          <td style="text-align: left">no.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">opus</td>
+          <td style="text-align: left">op.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">page</td>
+          <td style="text-align: left">p.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">paragraph</td>
+          <td style="text-align: left">para.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">subparagraph</td>
+          <td style="text-align: left">subpara.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">part</td>
+          <td style="text-align: left">pt.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">rule</td>
+          <td style="text-align: left">r.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">section</td>
+          <td style="text-align: left">sec.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">subsection</td>
+          <td style="text-align: left">subsec.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Section</td>
+          <td style="text-align: left">Sec.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">sub verbo</td>
+          <td style="text-align: left">sv.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">schedule</td>
+          <td style="text-align: left">sch.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">title</td>
+          <td style="text-align: left">tit.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">verse</td>
+          <td style="text-align: left">vrs.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">volume</td>
+          <td style="text-align: left">vol.</td>
+      </tr>
+  </tbody>
 </table>
 <p>In your call to the CAYW URL, you can override the abbreviations by adding them to the query, e.g. http://127.0.0.1:23119/better-bibtex/cayw?format=mmd&amp;page=&amp;Section=sec., page-picks will have no label, and Section-picks will get <code>sec.</code> rather than <code>Sec.</code>.</p>
 <p>The <code>clipboard</code> option can be used as a workaround for editors that haven&rsquo;t gotten around to integrating this yet. If

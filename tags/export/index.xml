@@ -19,7 +19,7 @@
       <link>/zotero-better-bibtex/exporting/auto/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zotero-better-bibtex/exporting/auto/index.html</guid>
-      <description>To export a library, group or collection, right-click on it in the left Zotero pane and choose “Export Library…” or “Export Collection…”. With BBT’s export translators (e.g., “Better BibTeX”), checking the Keep updated option will register the export for automation. After you’ve completed the current export, any changes to the collection or library will trigger an automatic re-export to update the file. You can review/remove exports from the BBT preferences. While I’ve gone to some lengths to make sure performance is OK, don’t go overboard with the number of auto-exports you have going.</description>
+      <description>To export a library, group or collection, right-click on it in the left Zotero pane and choose “Export Library…” or “Export Collection…”. With BBT’s export translators (e.g., “Better BibTeX”), checking the Keep updated option will register the export for automation. After you’ve completed the current export, any changes to the collection or library will trigger an automatic re-export to update the file. You can review/remove exports from the BBT preferences. While I’ve gone to some lengths to make sure performance is OK, don’t go overboard with the number of auto-exports you have going. Also, exporting only targeted selections over your whole library will get you better performance. You can set up separate exports for separate papers for example if you have set up a collection for each.</description>
     </item>
     <item>
       <title>Frequently Asked Questions</title>
@@ -33,14 +33,14 @@
       <link>/zotero-better-bibtex/exporting/pull/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zotero-better-bibtex/exporting/pull/index.html</guid>
-      <description>You can fetch your bibliography on the url http://127.0.0.1:23119/better-bibtex/collection?[collectionID].[format] 1. You can get this URL for a group, library or collection by right-clicking it and selecting Download Better BibTeX export...&#xA;You can add options to the export as URL parameters:&#xA;&amp;exportNotes=[true|false] &amp;useJournalAbbreviation=[true|false] You can fetch your library as part of your build, using something like curl from your Makefile, or with a BibLaTeX remote statement like&#xA;\addbibresource[location=remote]{http://127.0.0.1:23119/better-bibtex/collection?/0/8CV58ZVD.biblatex}format can be:&#xA;biblatex for BibLaTeX bibtex for BibTeX json or csljson for CSL-JSON yaml, yml or cslyaml for CSL-JSON in YAML format jzon for BetterBibTeX JSON debug format the value of translatorID taken from the header of any existing Zotero translator to get an export in that translator format Pull export will only work if you are compiling your document on the same system your Zotero client with BBT runs on.</description>
+      <description>You can fetch your bibliography on the url http://127.0.0.1:23119/better-bibtex/collection?[collectionID].[format] 1. You can get this URL for a group, library or collection by right-clicking it and selecting Download Better BibTeX export...&#xA;You can add options to the export as URL parameters:&#xA;&amp;exportNotes=[true|false] &amp;useJournalAbbreviation=[true|false] You can fetch your library as part of your build, using something like curl from your Makefile, or with a BibLaTeX remote statement like</description>
     </item>
     <item>
       <title>Performance</title>
       <link>/zotero-better-bibtex/support/performance/index.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/zotero-better-bibtex/support/performance/index.html</guid>
-      <description>The Better BibTeX exporters are a lot slower than the standard Zotero Bib(La)TeX exporters. If you have a small library, you will not likely notice this, but if you have several thousand items, and you are in the habit of exporting substantial parts of your library, this gets annoying really fast.&#xA;To deal with this problem, Better BibTeX implements an extensive caching system. With a filled cache, Better BibTeX is substantially faster than the default Zotero exporters.</description>
+      <description>The Better BibTeX exporters are a lot slower than the standard Zotero Bib(La)TeX exporters. If you have a small library, you will not likely notice this, but if you have several thousand items, and you are in the habit of exporting substantial parts of your library, this gets annoying really fast.&#xA;To deal with this problem, Better BibTeX implements an extensive caching system. With a filled cache, Better BibTeX is substantially faster than the default Zotero exporters. Specifically for automatic background exports, a filled cache is a good thing to have.</description>
     </item>
     <item>
       <title>Export</title>
