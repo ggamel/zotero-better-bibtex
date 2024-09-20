@@ -207,26 +207,16 @@ $Patcher$.schedule(Zotero.Items, 'merge', original => async function Zotero_Item
 
 // https://github.com/retorquere/zotero-better-bibtex/issues/769
 function parseLibraryKeyFromCitekey(libraryKey) {
-  try {
-    const decoded = decodeURIComponent(libraryKey)
-    if (decoded[0] === '@') {
-      const item = Zotero.BetterBibTeX.KeyManager.first({ where: { citationKey: decoded.substring(1) }})
+  const decoded = decodeURIComponent(libraryKey)
+  const m = decoded.match(/^@(.+)|bbt:(?:[{](\d+)[}])?(.+)/)
+  if (!m) return
 
-      return item ? { libraryID: item.libraryID, key: item.itemKey } : false
-    }
-
-    const m = decoded.match(/^bbt:(?:{([0-9]+)})?(.*)/)
-    if (m) {
-      const [ _libraryID, citationKey ] = m.slice(1)
-      const libraryID: number = (!_libraryID || _libraryID === '1') ? Zotero.Libraries.userLibraryID : parseInt(_libraryID)
-      const item = Zotero.BetterBibTeX.KeyManager.first({ where: { libraryID, citationKey }})
-      return item ? { libraryID: item.libraryID, key: item.itemKey } : false
-    }
-  }
-  catch (err) {
-    log.error('parseLibraryKeyFromCitekey:', libraryKey, err)
-  }
-  return null
+  const [ , solo, library, combined ] = m
+  const item = Zotero.BetterBibTeX.KeyManager.first({ where: {
+    libraryID: library ? parseInt(library) : Zotero.Libraries.userLibraryID,
+    citationKey: solo || combined,
+  }})
+  return item ? { libraryID: item.libraryID, key: item.itemKey } : false
 }
 
 $Patcher$.schedule(Zotero.API, 'getResultsFromParams', original => function Zotero_API_getResultsFromParams(params: Record<string, any>) {
@@ -251,20 +241,15 @@ $Patcher$.schedule(Zotero.API, 'getResultsFromParams', original => function Zote
 if (typeof Zotero.DataObjects.prototype.parseLibraryKeyHash === 'function') {
   $Patcher$.schedule(Zotero.DataObjects.prototype, 'parseLibraryKeyHash', original => function Zotero_DataObjects_prototype_parseLibraryKeyHash(libraryKey: string) {
     const item = parseLibraryKeyFromCitekey(libraryKey)
-    if (item !== null) return item
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return original.apply(this, arguments)
+    return typeof item === 'undefined' ? original.apply(this, arguments) : item
   })
 }
 if (typeof Zotero.DataObjects.prototype.parseLibraryKey === 'function') {
   $Patcher$.schedule(Zotero.DataObjects.prototype, 'parseLibraryKey', original => function Zotero_DataObjects_prototype_parseLibraryKey(libraryKey: string) {
     const item = parseLibraryKeyFromCitekey(libraryKey)
-    if (item) return item
-    if (item === false) return { libraryID: Zotero.Libraries.userLibraryID, key: undefined }
-
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return original.apply(this, arguments)
+    return typeof item === 'undefined' ? original.apply(this, arguments) : item
   })
 }
 
@@ -458,87 +443,73 @@ $Patcher$.schedule(Zotero.Utilities.Internal, 'extractExtraFields', original => 
 })
 
 $Patcher$.schedule(Zotero.Translate.Export.prototype, 'translate', original => function Zotero_Translate_Export_prototype_translate() {
-  if (this.noWait) {
-    this._displayOptions = this._displayOptions || {}
-    this._displayOptions.cached = false
+  let translatorID = this.translator[0]
+  if (translatorID.translatorID) translatorID = translatorID.translatorID
+  // requested translator
+  const translator = Translators.byId[translatorID]
+  if (this.noWait || !translator) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return original.apply(this, arguments)
   }
 
-  try {
-    // requested translator
-    let translatorID = this.translator[0]
-    if (translatorID.translatorID) translatorID = translatorID.translatorID
-    const translator = Translators.byId[translatorID]
-    const displayOptions = this._displayOptions || {}
+  const displayOptions = this._displayOptions || {}
 
-    if (translator) {
-      if (this.location) {
-        if (displayOptions.exportFileData) { // when exporting file data, the user was asked to pick a directory rather than a file
-          displayOptions.exportDir = this.location.path
-          displayOptions.exportPath = $OS.Path.join(this.location.path, `${ this.location.leafName }.${ translator.target }`)
-          displayOptions.cache = false
-        }
-        else {
-          displayOptions.exportDir = this.location.parent.path
-          displayOptions.exportPath = this.location.path
-          displayOptions.cache = true
-        }
-      }
-
-      if (this._export && displayOptions.keepUpdated) {
-        void AutoExport.register({
-          translatorID,
-          displayOptions,
-          scope: this._export.type === 'collection'
-            ? { type: 'collection', collection: this._export.collection }
-            : { type: this._export.type as 'library', id: this._export.id },
-          path: this.location.path,
-        })
-      }
-
-      let useWorker = typeof translator.displayOptions.worker === 'boolean' && displayOptions.worker
-
-      if (useWorker && !Translators.worker) {
-        // there wasn't an error starting a worker earlier
-        flash('failed to start a chromeworker')
-        useWorker = false
-      }
-      if (!Cache.opened) {
-        flash('cache not loaded, background exports are disabled')
-        useWorker = false
-      }
-
-      if (useWorker) {
-        return Translators.queueJob({
-          translatorID,
-          displayOptions,
-          translate: this,
-          scope: { ...this._export, getter: this._itemGetter },
-          path: this.location?.path,
-        })/* .then(() => {
-          trace('translation done', '+')
-        }) */
-      }
-      else {
-        return Translators.queue.add(async () => {
-          try {
-            await Cache.initExport(translator.label, exportContext(translator.label, displayOptions))
-            await original.apply(this, arguments)
-          }
-          finally {
-            await Cache.export.flush()
-          }
-        })
-      }
+  if (this.location) {
+    if (displayOptions.exportFileData) { // when exporting file data, the user was asked to pick a directory rather than a file
+      displayOptions.exportDir = this.location.path
+      displayOptions.exportPath = $OS.Path.join(this.location.path, `${ this.location.leafName }.${ translator.target }`)
+      displayOptions.cache = false
+    }
+    else {
+      displayOptions.exportDir = this.location.parent.path
+      displayOptions.exportPath = this.location.path
+      displayOptions.cache = true
     }
   }
-  catch (err) {
-    log.error('Zotero.Translate.Export::translate error:', err)
+
+  if (this._export && displayOptions.keepUpdated) {
+    void AutoExport.register({
+      translatorID,
+      displayOptions,
+      scope: this._export.type === 'collection'
+        ? { type: 'collection', collection: this._export.collection }
+        : { type: this._export.type as 'library', id: this._export.id },
+      path: this.location.path,
+    })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return original.apply(this, arguments)
+  let useWorker = typeof translator.displayOptions.worker === 'boolean' && displayOptions.worker
+
+  if (useWorker && !Translators.worker) {
+    // there wasn't an error starting a worker earlier
+    flash('failed to start a chromeworker')
+    useWorker = false
+  }
+  if (!Cache.opened) {
+    flash('cache not loaded, background exports are disabled')
+    useWorker = false
+  }
+
+  if (useWorker) {
+    return Translators.queueJob({
+      translatorID,
+      displayOptions,
+      translate: this,
+      scope: { ...this._export, getter: this._itemGetter },
+      path: this.location?.path,
+    })
+  }
+  else {
+    return Translators.queue.add(async () => {
+      try {
+        await Cache.initExport(translator.label, exportContext(translator.label, displayOptions))
+        await original.apply(this, arguments)
+      }
+      finally {
+        await Cache.export.flush()
+      }
+    })
+  }
 })
 
 export class BetterBibTeX {
