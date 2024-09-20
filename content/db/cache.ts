@@ -183,7 +183,10 @@ export class ExportCache {
 
     for (const id of ids) {
       const cursor = await index.openCursor(IDBKeyRange.only(id))
-      if (cursor) deletes.push(store.delete(cursor.primaryKey))
+      while (cursor) {
+        deletes.push(cursor.delete())
+        if (!await cursor.continue()) break
+      }
     }
     await Promise.all(deletes)
     await tx.commit()
@@ -200,7 +203,10 @@ export class ExportCache {
 
     const cache = tx.objectStore(this.name as 'BetterBibTeX')
     const cursor = await cache.index('context').openCursor(IDBKeyRange.only(path))
-    if (cursor) deletes.push(cache.delete(cursor.primaryKey))
+    while (cursor) {
+      deletes.push(cursor.delete())
+      if (!await cursor.continue()) break
+    }
 
     if (deleteContext) {
       const context = tx.objectStore('ExportContext')
@@ -496,7 +502,7 @@ export const Cache = new class $Cache {
             cursor = await store.openCursor()
             while (cursor) {
               tables[name][cursor.key as string] = cursor.value
-              if (!await cursor.continue()) cursor = undefined
+              if (!await cursor.continue()) break
             }
             break
 
