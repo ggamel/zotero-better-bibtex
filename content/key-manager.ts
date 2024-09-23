@@ -389,16 +389,14 @@ export const KeyManager = new class _KeyManager {
 
   private async $remove(keys: CitekeyRecord | CitekeyRecord[]) {
     if (Array.isArray(keys)) {
-      await Zotero.DB.executeTransaction(async () => {
-        let pos = 0
-        const chunk = 50
-        while (pos < keys.length) {
-          const slice = keys.slice(pos, chunk + pos)
-          if (!slice.length) break
-          pos += chunk
-          await Zotero.DB.queryAsync(`DELETE FROM betterbibtex.citationkey WHERE itemID IN (${ Array(slice.length).fill('?').join(',') })`, slice.map(key => key.itemID))
-        }
-      })
+      let pos = 0
+      const chunk = 50
+      while (pos < keys.length) {
+        const slice = keys.slice(pos, chunk + pos)
+        if (!slice.length) break
+        pos += chunk
+        await Zotero.DB.queryAsync(`DELETE FROM betterbibtex.citationkey WHERE itemID IN (${ Array(slice.length).fill('?').join(',') })`, slice.map(key => key.itemID))
+      }
     }
     else {
       await Zotero.DB.queryTx('DELETE FROM betterbibtex.citationkey WHERE itemID = ?', [keys.itemID])
@@ -466,51 +464,48 @@ export const KeyManager = new class _KeyManager {
   public async load(): Promise<void> {
     let missing: number[]
 
-    await Zotero.DB.executeTransaction(async () => {
-      const $items = `
-        WITH _items AS (
-          SELECT items.itemID, items.key as itemKey, items.libraryID, extra.value AS extra
-          FROM items
-          LEFT JOIN itemData extraField ON extraField.itemID = items.itemID AND extraField.fieldID IN (SELECT fieldID FROM fields WHERE fieldName = 'extra')
-          LEFT JOIN itemDataValues extra ON extra.valueID = extraField.valueID
-          WHERE items.itemID NOT IN (SELECT itemID FROM deletedItems)
-          AND items.itemTypeID NOT IN (SELECT itemTypeID FROM itemTypes WHERE typeName IN ('attachment', 'note', 'annotation'))
-          AND items.itemID NOT IN (SELECT itemID from feedItems)
-        )
+    const $items = `
+      WITH _items AS (
+        SELECT items.itemID, items.key as itemKey, items.libraryID, extra.value AS extra
+        FROM items
+        LEFT JOIN itemData extraField ON extraField.itemID = items.itemID AND extraField.fieldID IN (SELECT fieldID FROM fields WHERE fieldName = 'extra')
+        LEFT JOIN itemDataValues extra ON extra.valueID = extraField.valueID
+        WHERE items.itemID NOT IN (SELECT itemID FROM deletedItems)
+        AND items.itemTypeID NOT IN (SELECT itemTypeID FROM itemTypes WHERE typeName IN ('attachment', 'note', 'annotation'))
+        AND items.itemID NOT IN (SELECT itemID from feedItems)
+      )
       `
 
-      await ZoteroDB.queryAsync(`${ $items } DELETE FROM betterbibtex.citationkey WHERE itemID NOT IN (SELECT itemID FROM _items)`)
+    await ZoteroDB.queryAsync(`${ $items } DELETE FROM betterbibtex.citationkey WHERE itemID NOT IN (SELECT itemID FROM _items)`)
 
-      const keys: Map<number, CitekeyRecord> = new Map
-      let key: CitekeyRecord
-      for (key of await Zotero.DB.queryAsync('SELECT * from betterbibtex.citationkey')) {
-        keys.set(key.itemID, lc({ itemID: key.itemID, itemKey: key.itemKey, libraryID: key.libraryID, citationKey: key.citationKey, pinned: key.pinned }))
+    const keys: Map<number, CitekeyRecord> = new Map
+    let key: CitekeyRecord
+    for (key of await Zotero.DB.queryAsync('SELECT * from betterbibtex.citationkey')) {
+      keys.set(key.itemID, lc({ itemID: key.itemID, itemKey: key.itemKey, libraryID: key.libraryID, citationKey: key.citationKey, pinned: key.pinned }))
+    }
+
+    // fetch pinned keys to be sure
+    const keyLine = /(^|\n)Citation Key\s*:\s*(.+?)(\n|$)/i
+    const getKey = (extra: string) => {
+      if (!extra) return ''
+      const m = keyLine.exec(extra)
+      return m ? m[2].trim() : ''
+    }
+
+    let pinned: string
+    for (const item of (await ZoteroDB.queryAsync(`${ $items } SELECT itemID, itemKey, libraryID, extra FROM _items`))) {
+      pinned = getKey(item.extra)
+      if (pinned) {
+        keys.set(item.itemID, lc({ itemID: item.itemID, itemKey: item.itemKey, libraryID: item.libraryID, citationKey: pinned, pinned: true }))
       }
-
-      // fetch pinned keys to be sure
-      const keyLine = /(^|\n)Citation Key\s*:\s*(.+?)(\n|$)/i
-      const getKey = (extra: string) => {
-        if (!extra) return ''
-        const m = keyLine.exec(extra)
-        return m ? m[2].trim() : ''
+      else if (key = keys.get(item.itemID)) {
+        key.pinned = false
       }
+    }
 
-      let pinned: string
-      for (const item of (await ZoteroDB.queryAsync(`${ $items } SELECT itemID, itemKey, libraryID, extra FROM _items`))) {
-        pinned = getKey(item.extra)
-        if (pinned) {
-          keys.set(item.itemID, lc({ itemID: item.itemID, itemKey: item.itemKey, libraryID: item.libraryID, citationKey: pinned, pinned: true }))
-        }
-        else if (key = keys.get(item.itemID)) {
-          key.pinned = false
-        }
-      }
+    blink.insertMany(this.keys, [...keys.values()])
 
-      blink.insertMany(this.keys, [...keys.values()])
-
-      missing = await ZoteroDB.columnQueryAsync(`${ $items } SELECT itemID FROM _items WHERE itemID NOT IN (SELECT itemID from betterbibtex.citationkey)`)
-    })
-
+    missing = await ZoteroDB.columnQueryAsync(`${ $items } SELECT itemID FROM _items WHERE itemID NOT IN (SELECT itemID from betterbibtex.citationkey)`)
     const notify = async (ids: number[], action: Action) => {
       if (!Cache.ZoteroSerialized) return
 
