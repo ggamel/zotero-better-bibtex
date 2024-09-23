@@ -395,7 +395,7 @@ export const KeyManager = new class _KeyManager {
         const slice = keys.slice(pos, chunk + pos)
         if (!slice.length) break
         pos += chunk
-        await Zotero.DB.queryAsync(`DELETE FROM betterbibtex.citationkey WHERE itemID IN (${ Array(slice.length).fill('?').join(',') })`, slice.map(key => key.itemID))
+        await Zotero.DB.queryTx(`DELETE FROM betterbibtex.citationkey WHERE itemID IN (${ Array(slice.length).fill('?').join(',') })`, slice.map(key => key.itemID))
       }
     }
     else {
@@ -474,7 +474,7 @@ export const KeyManager = new class _KeyManager {
       )
       `
 
-    await ZoteroDB.queryAsync(`${ $items } DELETE FROM betterbibtex.citationkey WHERE itemID NOT IN (SELECT itemID FROM _items)`)
+    await ZoteroDB.queryTx(`${ $items } DELETE FROM betterbibtex.citationkey WHERE itemID NOT IN (SELECT itemID FROM _items)`)
 
     const keys: Map<number, CitekeyRecord> = new Map
     let key: CitekeyRecord
