@@ -462,8 +462,6 @@ export const KeyManager = new class _KeyManager {
   }
 
   public async load(): Promise<void> {
-    let missing: number[]
-
     const $items = `
       WITH _items AS (
         SELECT items.itemID, items.key as itemKey, items.libraryID, extra.value AS extra
@@ -492,9 +490,8 @@ export const KeyManager = new class _KeyManager {
       return m ? m[2].trim() : ''
     }
 
-    let pinned: string
     for (const item of (await ZoteroDB.queryAsync(`${ $items } SELECT itemID, itemKey, libraryID, extra FROM _items`))) {
-      pinned = getKey(item.extra)
+      const pinned: string = getKey(item.extra)
       if (pinned) {
         keys.set(item.itemID, lc({ itemID: item.itemID, itemKey: item.itemKey, libraryID: item.libraryID, citationKey: pinned, pinned: true }))
       }
@@ -505,7 +502,7 @@ export const KeyManager = new class _KeyManager {
 
     blink.insertMany(this.keys, [...keys.values()])
 
-    missing = await ZoteroDB.columnQueryAsync(`${ $items } SELECT itemID FROM _items WHERE itemID NOT IN (SELECT itemID from betterbibtex.citationkey)`)
+    const missing: number[] = await ZoteroDB.columnQueryAsync(`${ $items } SELECT itemID FROM _items WHERE itemID NOT IN (SELECT itemID from betterbibtex.citationkey)`)
     const notify = async (ids: number[], action: Action) => {
       if (!Cache.ZoteroSerialized) return
 
