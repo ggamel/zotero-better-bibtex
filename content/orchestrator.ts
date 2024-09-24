@@ -224,7 +224,8 @@ export class Orchestrator {
   }
 
   public async startup(reason: Reason, progress?: Progress): Promise<void> {
-    const ping = setInterval(() => { log.debug('orchestrator: busy...') }, 1000)
+    const start = Date.now()
+    const ping = setInterval(() => { log.debug(`orchestrator: running (${new Date(Date.now() - start).toISOString().replace(/(.*T)([^.]+).*/, '$2')})`) }, 1000)
     await this.run('startup', reason, progress)
     progress?.('startup', 'ready', 100, 100, 'ready')
     void Events.emit('ready')
