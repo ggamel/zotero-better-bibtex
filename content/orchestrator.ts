@@ -7,6 +7,7 @@ import { Preference } from './prefs'
 import { Shim } from './os'
 import { is7 } from './client'
 const $OS = is7 ? Shim : OS
+import { Events } from './events'
 
 type Handler = (reason: Reason, task?: Task) => void | string | Promise<void | string>
 
@@ -225,6 +226,7 @@ export class Orchestrator {
   public async startup(reason: Reason, progress?: Progress): Promise<void> {
     await this.run('startup', reason, progress)
     progress?.('startup', 'ready', 100, 100, 'ready')
+    void Events.emit('ready')
 
     if (Preference.testing) this.gantt('startup')
   }

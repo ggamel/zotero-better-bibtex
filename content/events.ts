@@ -32,6 +32,7 @@ class Emitter extends Emittery<{
   'libraries-changed': number[]
   'libraries-removed': number[]
   loaded: undefined
+  ready: undefined
   'preference-changed': string
   'window-loaded': { win: Window; href: string }
   idle: { state: IdleState; topic: IdleTopic }

@@ -459,6 +459,7 @@ export const AutoExport = new class $AutoExport { // eslint-disable-line @typesc
       description: 'auto-export',
       needs: [ 'sqlite', 'translators' ],
       startup: async () => {
+        log.debug('auto-export: start migration')
         try {
           await Promise.race([this.migrate(), patience(20)])
         }
@@ -470,6 +471,7 @@ export const AutoExport = new class $AutoExport { // eslint-disable-line @typesc
             log.error('auto-export migration failed:', err)
           }
         }
+        log.debug('auto-export: migration done')
 
         for (const key of Services.prefs.getBranch('extensions.zotero.translators.better-bibtex.autoExport.').getChildList('', {})) {
           try {
@@ -480,58 +482,65 @@ export const AutoExport = new class $AutoExport { // eslint-disable-line @typesc
           catch {
           }
         }
+        log.debug('auto-export: loaded')
 
-        if (Preference.autoExport === 'immediate') queue.resume('startup')
         Events.addIdleListener('auto-export', Preference.autoExportIdleWait)
-        Events.on('idle', state => {
-          if (state.topic !== 'auto-export' || Preference.autoExport !== 'idle') return
+        Events.on('ready', () => {
+          log.debug('auto-export: ready, set, go')
+          if (Preference.autoExport === 'immediate') queue.resume('startup')
 
-          switch (state.state) {
-            case 'active':
-              queue.pause('end-of-idle')
-              break
+          Events.on('idle', state => {
+            if (state.topic !== 'auto-export' || Preference.autoExport !== 'idle') return
 
-            case 'idle':
-              queue.resume('start-of-idle')
-              break
-
-            default:
-              log.error(`idle: unexpected idle state ${JSON.stringify(state)}`)
-              break
-          }
-        })
-
-        Events.on('sync', running => {
-          if (running) {
-            queue.holdDuringSync()
-          }
-          else {
-            queue.releaseAfterSync()
-          }
-        })
-
-        Events.on('preference-changed', pref => {
-          if (pref === 'autoExport') {
-            switch (Preference.autoExport) {
-              case 'immediate':
-                queue.resume('preference-change')
+            switch (state.state) {
+              case 'active':
+                queue.pause('end-of-idle')
                 break
 
               case 'idle':
-                if (Events.idle['auto-export'] === 'idle') queue.resume('start-of-idle')
+                queue.resume('start-of-idle')
                 break
 
-              default: // off / idle
-                queue.pause('preference-change')
+              default:
+                log.error(`idle: unexpected idle state ${JSON.stringify(state)}`)
+                break
             }
-          }
+          })
 
+          Events.on('sync', running => {
+            if (running) {
+              queue.holdDuringSync()
+            }
+            else {
+              queue.releaseAfterSync()
+            }
+          })
+          Events.on('preference-changed', pref => {
+            if (pref === 'autoExport') {
+              switch (Preference.autoExport) {
+                case 'immediate':
+                  queue.resume('preference-change')
+                  break
+
+                case 'idle':
+                  if (Events.idle['auto-export'] === 'idle') queue.resume('start-of-idle')
+                  break
+
+                default: // off / idle
+                  queue.pause('preference-change')
+              }
+            }
+          })
+        })
+
+        Events.on('preference-changed', pref => {
           for (const translator of (affects[pref] || []).map(label => Translators.byLabel[label])) {
             for (const ae of blink.many(this.db, { where: { translatorID: translator.translatorID }})) {
               if (!(pref in ae)) queue.add(ae.path)
             }
           }
         })
+        log.debug('auto-export: startup finished')
       },
       shutdown: () => {
         for (const cb of this.unwatch) {
