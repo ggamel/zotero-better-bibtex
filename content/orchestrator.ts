@@ -224,9 +224,11 @@ export class Orchestrator {
   }
 
   public async startup(reason: Reason, progress?: Progress): Promise<void> {
+    const ping = setInterval(() => { log.debug('orchestrator: busy...') }, 1000)
     await this.run('startup', reason, progress)
     progress?.('startup', 'ready', 100, 100, 'ready')
     void Events.emit('ready')
+    clearInterval(ping)
 
     if (Preference.testing) this.gantt('startup')
   }
