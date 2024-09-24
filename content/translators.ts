@@ -7,32 +7,6 @@ import merge from 'lodash.merge'
 import { Cache } from './db/cache'
 import { Serializer } from './item-export-format'
 
-/*
-async function guard(run: Promise<void>): Promise<boolean> {
-  let timeout = true
-
-  const delay = async () => {
-    await Zotero.Promise.delay(20000)
-    if (timeout) {
-      log.error('installing translators: raced to timeout!')
-      throw { timeout: true, message: 'timeout' } // eslint-disable-line no-throw-literal
-    }
-  }
-
-  try {
-    await Promise.race([run, delay()])
-    timeout = false
-    log.info('installing translators: guard OK')
-    return true
-  }
-  catch (err) {
-    log.error('installing translators: guard failed because of', err.message )
-    if (err.timeout) return false
-    throw err
-  }
-}
-*/
-
 Components.utils.import('resource://gre/modules/Services.jsm')
 
 declare class ChromeWorker extends Worker { }
