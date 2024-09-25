@@ -543,6 +543,7 @@ export const KeyManager = new class _KeyManager {
         throw new Error('do not clear the keys database!')
       }),
     ]
+    if (missing.length) log.info(`keymanager: generating ${missing.length} missing keys`)
 
     // generate keys for entries that don't have them yet
     const progress = new Progress(missing.length, 'Assigning citation keys')
