@@ -337,6 +337,7 @@ export const Translators = new class { // eslint-disable-line @typescript-eslint
       if (job.path && job.canceled) return ''
 
       items = items.filter(item => !item.isAnnotation?.())
+      await Zotero.Items.loadDataTypes(items)
 
       const prepare = new Pinger({
         total: items.length,

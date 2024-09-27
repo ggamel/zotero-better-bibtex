@@ -21,7 +21,7 @@ export class Serializer {
   }
 
   private async item(item: ZoteroItem, selectedLibraryID: number): Promise<Serialized> {
-    if (item.libraryID !== selectedLibraryID) await item.loadAllData()
+    await item.loadAllData()
 
     let serialized: Item = item.toJSON()
     serialized.uri = Zotero.URI.getItemURI(item)
