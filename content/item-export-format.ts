@@ -20,7 +20,7 @@ export class Serializer {
     return serialized
   }
 
-  private async item(item: ZoteroItem, selectedLibraryID: number): Promise<Serialized> {
+  private async item(item: ZoteroItem): Promise<Serialized> {
     await item.loadAllData()
 
     let serialized: Item = item.toJSON()
@@ -48,8 +48,8 @@ export class Serializer {
   }
 
   public async serialize(items: ZoteroItem[]): Promise<Serialized[]> {
-    const selectedLibraryID = Zotero.getActiveZoteroPane().getSelectedLibraryID()
-    return Promise.all(items.map(item => this.item(item, selectedLibraryID)))
+    await Zotero.Items.loadDataTypes(items)
+    return Promise.all(items.map(item => this.item(item)))
   }
 }
 export const serializer = new Serializer
