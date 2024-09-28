@@ -21,7 +21,7 @@ export class Serializer {
   }
 
   private async item(item: ZoteroItem): Promise<Serialized> {
-    await item.loadAllData()
+    await item.loadAllData() // should do nothing
 
     let serialized: Item = item.toJSON()
     serialized.uri = Zotero.URI.getItemURI(item)
@@ -49,7 +49,12 @@ export class Serializer {
 
   public async serialize(items: ZoteroItem[]): Promise<Serialized[]> {
     await Zotero.Items.loadDataTypes(items)
-    return Promise.all(items.map(item => this.item(item)))
+    const serialized: Serialized[] = []
+    for (const item of items) {
+      serialized.push(await this.item(item))
+    }
+    return serialized
+    // return Promise.all(items.map(item => this.item(item)))
   }
 }
 export const serializer = new Serializer
