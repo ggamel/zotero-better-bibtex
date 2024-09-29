@@ -10,7 +10,7 @@ import { bySlug } from '../../gen/translators'
 import version from '../../gen/version'
 // import { main as probe } from './cache-test'
 
-import { CursorWithValue, Database, Transaction, Factory } from '@retorquere/indexeddb-promise'
+import { DatabaseFactory, Database } from '@idxdb/promised'
 
 import type { Translators as Translator } from '../../typings/translators'
 const skip = new Set([ 'keepUpdated', 'worker', 'exportFileData' ])
@@ -40,100 +40,7 @@ export type ExportedItem = {
   metadata: ExportedItemMetadata
 }
 
-/*
-interface Schema extends DBSchema {
-  ZoteroSerialized: {
-    value: Serialized
-    key: number
-  }
-  touched: {
-    value: boolean
-    key: number
-  }
-
-  ExportContext: {
-    value: ExportContext
-    key: number
-    indexes: { context: string }
-  }
-
-  BetterBibLaTeX: {
-    value: ExportedItem
-    key: [number, number]
-    indexes: {
-      context: number
-      itemID: number
-      'context-itemID': [ number, number ]
-    }
-  }
-  BetterBibTeX: {
-    value: ExportedItem
-    key: [number, number]
-    indexes: {
-      context: number
-      itemID: number
-      'context-itemID': [ number, number ]
-    }
-  }
-  BetterCSLJSON: {
-    value: ExportedItem
-    key: [number, number]
-    indexes: {
-      context: number
-      itemID: number
-      'context-itemID': [ number, number ]
-    }
-  }
-  BetterCSLYAML: {
-    value: ExportedItem
-    key: [number, number]
-    indexes: {
-      context: number
-      itemID: number
-      'context-itemID': [ number, number ]
-    }
-  }
-
-  metadata: {
-    value: { key: string; value: string | number }
-    key: string
-  }
-}
-*/
 export type ExportCacheName = 'BetterBibLaTeX' | 'BetterBibTeX' | 'BetterCSLJSON' | 'BetterCSLYAML'
-
-class CacheDB extends Database {
-  public _upgrade(_transaction: Transaction, oldVersion: number, newVersion: number | null): void {
-    if (typeof newVersion !== 'number') {
-      log.info(`cache: creating ${newVersion}`)
-    }
-    else {
-      log.info(`cache: upgrading ${oldVersion} => ${newVersion}`)
-    }
-    for (const store of this.objectStoreNames) {
-      this.deleteObjectStore(store)
-    }
-
-    this.createObjectStore('ZoteroSerialized', { keyPath: 'itemID' })
-    this.createObjectStore('touched')
-    this.createObjectStore('metadata', { keyPath: 'key' })
-
-    const context = this.createObjectStore('ExportContext', { keyPath: 'id', autoIncrement: true })
-    context.createIndex('context', 'context', { unique: true })
-
-    const stores = [
-      this.createObjectStore('BetterBibTeX', { keyPath: [ 'context', 'itemID' ]}),
-      this.createObjectStore('BetterBibLaTeX', { keyPath: [ 'context', 'itemID' ]}),
-      this.createObjectStore('BetterCSLJSON', { keyPath: [ 'context', 'itemID' ]}),
-      this.createObjectStore('BetterCSLYAML', { keyPath: [ 'context', 'itemID' ]}),
-    ]
-    for (const store of stores) {
-      store.createIndex('context', 'context')
-      store.createIndex('itemID', 'itemID')
-      store.createIndex('context-itemID', [ 'context', 'itemID' ], { unique: true })
-    }
-  }
-}
 
 class Running {
   public items: Map<number, ExportedItem>
@@ -352,8 +259,8 @@ class ZoteroSerialized {
 }
 
 export const Cache = new class $Cache {
-  public version = 10
   public name = 'BetterBibTeXCache'
+  public version = 10
 
   private db: CacheDB
 
@@ -364,12 +271,41 @@ export const Cache = new class $Cache {
   public BetterCSLJSON: ExportCache
   public BetterCSLYAML: ExportCache
 
-  private async $open(action: string): Promise<CacheDB> {
+  private async $open(action: string): Promise<Database> {
     try {
-      log.info(`cache: ${action} ${this.version}`)
-      const db = new CacheDB(this.name, this.version)
-      await db.open()
-      return db
+      return await DatabaseFactory.open(this.name, this.version, [{
+        version: this.version,
+        migration: async ({db, transaction, dbOldVersion, dbNewVersion, migrationVersion}) => {
+          if (typeof bdNewVersion !== 'number') {
+            log.info(`cache: creating ${dbNewVersion}`)
+          }
+          else {
+            log.info(`cache: upgrading ${dbOldVersion} => ${dbNewVersion}`)
+          }
+          for (const store of this.objectStoreNames) {
+            db.deleteObjectStore(store)
+          }
+
+          db.createObjectStore('ZoteroSerialized', { keyPath: 'itemID' })
+          db.createObjectStore('touched')
+          db.createObjectStore('metadata', { keyPath: 'key' })
+
+          const context = db.createObjectStore('ExportContext', { keyPath: 'id', autoIncrement: true })
+          context.createIndex('context', 'context', { unique: true })
+
+          const stores = [
+            db.createObjectStore('BetterBibTeX', { keyPath: [ 'context', 'itemID' ]}),
+            db.createObjectStore('BetterBibLaTeX', { keyPath: [ 'context', 'itemID' ]}),
+            db.createObjectStore('BetterCSLJSON', { keyPath: [ 'context', 'itemID' ]}),
+            db.createObjectStore('BetterCSLYAML', { keyPath: [ 'context', 'itemID' ]}),
+          ]
+          for (const store of stores) {
+            store.createIndex('context', 'context')
+            store.createIndex('itemID', 'itemID')
+            store.createIndex('context-itemID', [ 'context', 'itemID' ], { unique: true })
+          }
+        },
+      }])
     }
     catch (err) {
       log.error(`cache: ${action} ${this.version} failed: ${err.message}`)
