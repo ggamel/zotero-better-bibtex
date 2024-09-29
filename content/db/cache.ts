@@ -10,7 +10,7 @@ import { bySlug } from '../../gen/translators'
 import version from '../../gen/version'
 // import { main as probe } from './cache-test'
 
-import { DatabaseFactory, Database } from '@idxdb/promised'
+import { DatabaseFactory, Database, ValueCursorInterface } from '@idxdb/promised'
 
 import type { Translators as Translator } from '../../typings/translators'
 const skip = new Set([ 'keepUpdated', 'worker', 'exportFileData' ])
@@ -79,7 +79,7 @@ class Running {
 }
 
 export class ExportCache {
-  constructor(private db: CacheDB, private name: ExportCacheName) {
+  constructor(private db: Database, private name: ExportCacheName) {
   }
 
   public async touch(ids: number[]): Promise<void> {
@@ -88,9 +88,12 @@ export class ExportCache {
     const index = store.index('itemID')
     const deletes: Promise<void>[] = []
 
+    const del = async cursor => {
+      if (!(await cursor.end())) await store.delete(cursor.primaryKey)
+    }
     for (const id of ids) {
-      const cursor = await index.openCursor(IDBKeyRange.only(id))
-      if (cursor) deletes.push(store.delete(cursor.primaryKey))
+      const cursor = index.openCursor<[ 'context', 'itemID' ], number, ExportedItem>(IDBKeyRange.only(id))
+      deletes.push(del(cursor))
     }
     await Promise.all(deletes)
     await tx.commit()
@@ -106,8 +109,11 @@ export class ExportCache {
     const deletes: Promise<void>[] = []
 
     const cache = tx.objectStore(this.name as 'BetterBibTeX')
-    const cursor = await cache.index('context').openCursor(IDBKeyRange.only(path))
-    if (cursor) deletes.push(cache.delete(cursor.primaryKey))
+    const del = async cur => {
+      if (!(await cur.end())) await cache.delete(cur.primaryKey)
+    }
+    const cursor = cache.index('context').openCursor(IDBKeyRange.only(path))
+    deletes.push(del(cursor))
 
     if (deleteContext) {
       const context = tx.objectStore('ExportContext')
@@ -139,7 +145,7 @@ export class ExportCache {
       const store = tx.objectStore('ExportContext')
       const index = store.index('context')
       // force type to get auto-increment field
-      context = (await index.get(path))?.id || (await store.add({ context: path } as unknown as ExportContext))
+      context = (await index.get<ExportContext, string>(path))?.id || (await store.add({ context: path } as unknown as ExportContext))
     }
     catch {
       return { context, items }
@@ -150,7 +156,7 @@ export class ExportCache {
       // trace(`${this.name} load`)
       const store = tx.objectStore(this.name)
       const index = store.index('context')
-      const all = await index.getAll(context)
+      const all = await index.getAll<ExportedItem, number>(context)
       // trace(`${this.name} loaded`)
       for (const entry of all) {
         items.set(entry.itemID, entry)
@@ -177,7 +183,7 @@ class ZoteroSerialized {
   public filled = 0 // exponential moving average
   private smoothing = 2 / (10 + 1) // keep average over last 10 fills
 
-  constructor(private db: CacheDB) {
+  constructor(private db: Database) {
   }
 
   private cachable(item: any): boolean {
@@ -228,11 +234,11 @@ class ZoteroSerialized {
     const tx = this.db.transaction('ZoteroSerialized', 'readonly')
     const store = tx.objectStore('ZoteroSerialized')
     if (Zotero.isWin && !is7) {
-      items = (await Promise.all(ids.map(id => store.get(id)))).filter(item => item)
+      items = (await Promise.all(ids.map(id => store.get<Serialized, number>(id)))).filter(item => item)
     }
     else {
       const requested = new Set(ids)
-      items = (await store.getAll()).filter(item => requested.has(item.itemID))
+      items = (await store.getAll<Serialized, number>()).filter(item => requested.has(item.itemID))
     }
 
     if (ids.length !== items.length) log.error(`indexed: failed to fetch ${ ids.length - items.length } items`)
@@ -262,7 +268,7 @@ export const Cache = new class $Cache {
   public name = 'BetterBibTeXCache'
   public version = 10
 
-  private db: CacheDB
+  private db: Database
 
   public ZoteroSerialized: ZoteroSerialized
 
@@ -275,14 +281,14 @@ export const Cache = new class $Cache {
     try {
       return await DatabaseFactory.open(this.name, this.version, [{
         version: this.version,
-        migration: async ({db, transaction, dbOldVersion, dbNewVersion, migrationVersion}) => {
-          if (typeof bdNewVersion !== 'number') {
+        migration: async ({ db, dbOldVersion, dbNewVersion }) => { // eslint-disable-line @typescript-eslint/require-await
+          if (typeof dbNewVersion !== 'number') {
             log.info(`cache: creating ${dbNewVersion}`)
           }
           else {
             log.info(`cache: upgrading ${dbOldVersion} => ${dbNewVersion}`)
           }
-          for (const store of this.objectStoreNames) {
+          for (const store of db.objectStoreNames) {
             db.deleteObjectStore(store)
           }
 
@@ -308,7 +314,7 @@ export const Cache = new class $Cache {
       }])
     }
     catch (err) {
-      log.error(`cache: ${action} ${this.version} failed: ${err.message}`)
+      log.error(`cache: ${action} ${this.version} failed: ${err.message}\n${err.stack}`)
       return null
     }
   }
@@ -318,7 +324,7 @@ export const Cache = new class $Cache {
 
     const tx = this.db.transaction('metadata', 'readonly')
     const store = tx.objectStore('metadata')
-    for (const rec of (await store.getAll()) as { key: string; value: string }[]) {
+    for (const rec of await store.getAll<{ key: string; value: string }, string>()) {
       metadata[rec.key] = rec.value
     }
 
@@ -331,7 +337,7 @@ export const Cache = new class $Cache {
     this.db = await this.$open('open')
     if (!this.db) {
       log.info('cache: could not open, delete and reopen') // #2995, downgrade 6 => 7
-      await Factory.deleteDatabase(this.name)
+      await DatabaseFactory.deleteDatabase(this.name)
       this.db = await this.$open('reopen')
     }
 
@@ -351,7 +357,7 @@ export const Cache = new class $Cache {
       if (reason) {
         log.info(`cache: reopening because ${reason}`)
         this.db.close()
-        await Factory.deleteDatabase(this.name)
+        await DatabaseFactory.deleteDatabase(this.name)
         this.db = await this.$open('upgrade')
       }
       const tx = this.db.transaction('metadata', 'readwrite')
@@ -445,7 +451,7 @@ export const Cache = new class $Cache {
     if (!this.available('dump')) return {}
 
     const tables: Record<string, any> = {}
-    let cursor: CursorWithValue | void
+    let cursor: ValueCursorInterface<number, number, boolean>
     for (const name of this.db.objectStoreNames) {
       try {
         const tx = this.db.transaction(name, 'readonly')
@@ -453,10 +459,10 @@ export const Cache = new class $Cache {
         switch (name) {
           case 'touched':
             tables[name] = {}
-            cursor = await store.openCursor()
-            while (cursor) {
-              tables[name][cursor.key as string] = cursor.value
-              if (!await cursor.continue()) cursor = undefined
+            cursor = store.openCursor()
+            while (!(await cursor.end())) {
+              tables[name][cursor.key] = cursor.value
+              cursor.continue()
             }
             break
 
