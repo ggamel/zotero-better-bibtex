@@ -112,7 +112,7 @@ export class ExportCache {
     const del = async cur => {
       if (!(await cur.end())) await cache.delete(cur.primaryKey)
     }
-    const cursor = cache.index('context').openCursor(IDBKeyRange.only(path))
+    const cursor = cache.index('context').openCursor<['context', 'itemID'], string, ExportedItem>(IDBKeyRange.only(path))
     deletes.push(del(cursor))
 
     if (deleteContext) {
@@ -266,7 +266,7 @@ class ZoteroSerialized {
 
 export const Cache = new class $Cache {
   public name = 'BetterBibTeXCache'
-  public version = 10
+  public version = 11
 
   private db: Database
 
@@ -294,7 +294,7 @@ export const Cache = new class $Cache {
 
           db.createObjectStore('ZoteroSerialized', { keyPath: 'itemID' })
           db.createObjectStore('touched')
-          db.createObjectStore('metadata', { keyPath: 'key' })
+          db.createObjectStore('metadata')
 
           const context = db.createObjectStore('ExportContext', { keyPath: 'id', autoIncrement: true })
           context.createIndex('context', 'context', { unique: true })
@@ -324,8 +324,10 @@ export const Cache = new class $Cache {
 
     const tx = this.db.transaction('metadata', 'readonly')
     const store = tx.objectStore('metadata')
-    for (const rec of await store.getAll<{ key: string; value: string }, string>()) {
-      metadata[rec.key] = rec.value
+    const cursor = store.openCursor<string, string, string>()
+    while (!(await cursor.end())) {
+      metadata[cursor.key] = cursor.value
+      cursor.continue()
     }
 
     return metadata
@@ -345,7 +347,7 @@ export const Cache = new class $Cache {
       const del = 'extensions.zotero.translators.better-bibtex.cache.delete'
       const metadata = { Zotero: '', BetterBibTeX: '', lastUpdated: '', ...(await this.metadata()) }
       const reasons = [
-        { reason: `Zotero version changed from ${metadata.Zotero || 'none'} to ${Zotero.version}`, test: metadata.Zotero && metadata.Zotero !== metadata.Zotero },
+        { reason: `Zotero version changed from ${metadata.Zotero || 'none'} to ${Zotero.version}`, test: metadata.Zotero && metadata.Zotero !== Zotero.version },
         { reason: `Better BibTeX version changed from ${metadata.BetterBibTeX || 'none'} to ${version}`, test: metadata.BetterBibTeX && metadata.BetterBibTeX !== version },
         { reason: `cache gap found ${metadata.lastUpdated} => ${lastUpdated}`, test: (lastUpdated || false) && metadata.lastUpdated && lastUpdated !== metadata.lastUpdated },
         { reason: 'marked for deletion', test: Zotero.Prefs.get(del) || false },
@@ -359,12 +361,12 @@ export const Cache = new class $Cache {
         this.db.close()
         await DatabaseFactory.deleteDatabase(this.name)
         this.db = await this.$open('upgrade')
+        const tx = this.db.transaction('metadata', 'readwrite')
+        const store = tx.objectStore('metadata')
+        await store.put(Zotero.version, 'Zotero')
+        await store.put(version, 'BetterBibTeX')
+        await tx.commit()
       }
-      const tx = this.db.transaction('metadata', 'readwrite')
-      const store = tx.objectStore('metadata')
-      await store.put({ key: 'Zotero', value: Zotero.version })
-      await store.put({ key: 'BetterBibTeX', value: version })
-      await tx.commit()
     }
 
     this.ZoteroSerialized = new ZoteroSerialized(this.db)
@@ -459,7 +461,7 @@ export const Cache = new class $Cache {
         switch (name) {
           case 'touched':
             tables[name] = {}
-            cursor = store.openCursor()
+            cursor = store.openCursor<number, number, boolean>()
             while (!(await cursor.end())) {
               tables[name][cursor.key] = cursor.value
               cursor.continue()
