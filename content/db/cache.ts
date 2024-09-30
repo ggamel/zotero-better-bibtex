@@ -78,6 +78,10 @@ class Running {
   }
 }
 
+async function commit(tx) {
+  if (is7) await tx.commit()
+}
+
 export class ExportCache {
   constructor(private db: Database, private name: ExportCacheName) {
   }
@@ -96,7 +100,7 @@ export class ExportCache {
       deletes.push(del(cursor))
     }
     await Promise.all(deletes)
-    await tx.commit()
+    await commit(tx)
   }
 
   public async clear(path: string): Promise<void> {
@@ -122,7 +126,7 @@ export class ExportCache {
     }
 
     await Promise.all(deletes)
-    await tx.commit()
+    await commit(tx)
   }
 
   public async count(path: string): Promise<number> {
@@ -175,7 +179,7 @@ export class ExportCache {
     const tx = this.db.transaction(this.name, 'readwrite')
     const store = tx.objectStore(this.name)
     await Promise.all(items.map(item => store.put(item)))
-    await tx.commit()
+    await commit(tx)
   }
 }
 
@@ -213,7 +217,7 @@ class ZoteroSerialized {
     })
 
     await Promise.all([ ...[...purge].map(id => store.delete(id)), touched.clear() ])
-    await tx.commit()
+    await commit(tx)
 
     const current = (items.length - fill.length) / items.length
     this.filled = (current - this.filled) * this.smoothing + this.filled
@@ -224,7 +228,7 @@ class ZoteroSerialized {
       store = tx.objectStore('ZoteroSerialized')
       const puts = serialized.map(item => store.put(item))
       await Promise.all(puts)
-      await tx.commit()
+      await commit(tx)
     }
   }
 
@@ -250,7 +254,7 @@ class ZoteroSerialized {
     const store = tx.objectStore('touched')
     const puts = ids.map(id => store.put(true, id))
     await Promise.all(puts)
-    await tx.commit()
+    await commit(tx)
   }
 
   public async purge(): Promise<void> {
@@ -260,7 +264,7 @@ class ZoteroSerialized {
 
     const purge = (await touched.getAllKeys()).map(id => serialized.delete(id))
     await Promise.all([ ...purge, touched.clear() ])
-    await tx.commit()
+    await commit(tx)
   }
 }
 
@@ -365,7 +369,7 @@ export const Cache = new class $Cache {
         const store = tx.objectStore('metadata')
         await store.put(Zotero.version, 'Zotero')
         await store.put(version, 'BetterBibTeX')
-        await tx.commit()
+        await commit(tx)
       }
     }
 
@@ -400,7 +404,7 @@ export const Cache = new class $Cache {
     const tx = this.db.transaction('metadata', 'readwrite')
     const metadata = tx.objectStore('metadata')
     await metadata.put({ key: 'lastUpdated', value: Zotero.Date.dateToSQL((new Date), true) })
-    await tx.commit()
+    await commit(tx)
   }
 
   public cache(store: string): ExportCache {
@@ -415,7 +419,7 @@ export const Cache = new class $Cache {
     if (stores.length) {
       const tx = this.db.transaction(stores, 'readwrite')
       await Promise.all(stores.map(name => tx.objectStore(name).clear()))
-      await tx.commit()
+      await commit(tx)
     }
   }
 
