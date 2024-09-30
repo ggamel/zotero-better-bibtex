@@ -403,7 +403,7 @@ export const Cache = new class $Cache {
     }
     const tx = this.db.transaction('metadata', 'readwrite')
     const metadata = tx.objectStore('metadata')
-    await metadata.put({ key: 'lastUpdated', value: Zotero.Date.dateToSQL((new Date), true) })
+    await metadata.put(Zotero.Date.dateToSQL((new Date), true), 'lastUpdated')
     await commit(tx)
   }
 
