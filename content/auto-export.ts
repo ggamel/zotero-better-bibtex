@@ -276,6 +276,7 @@ const queue = new class TaskQueue {
 
   private async runAsync(path: string) {
     await Zotero.BetterBibTeX.ready
+    log.debug('3000: starting auto-export', path)
 
     const ae = AutoExport.get(path)
     if (!ae) throw new Error(`AutoExport for ${ JSON.stringify(path) } does not exist`)

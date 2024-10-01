@@ -79,7 +79,6 @@ class Emitter extends Emittery<{
 }
 
 export const Events = new Emitter({
-  /*
   debug: {
     name: 'better-bibtex event',
     enabled: Zotero.Prefs.get('translators.better-bibtex.logEvents'),
@@ -93,7 +92,6 @@ export const Events = new Emitter({
       }
     },
   },
-  */
 })
 
 class SyncListener {
