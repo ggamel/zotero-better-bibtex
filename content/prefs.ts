@@ -31,6 +31,7 @@ export const Preference = new class PreferenceManager extends PreferenceManagerB
 
     for (const pref of Object.keys(this.minimum)) {
       this.repair(pref)
+      log.debug('pref: at start', this.all)
     }
 
     this.baseAttachmentPath = Zotero.Prefs.get('baseAttachmentPath')
@@ -117,6 +118,7 @@ export const Preference = new class PreferenceManager extends PreferenceManagerB
   }
 
   changed(pref: string) {
+    log.debug('pref:', pref, '=>', this[pref])
     // prevent foot-guns
     if (this.repair(pref)) return
     if (pref === 'itemObserverDelay') Events.itemObserverDelay = this.itemObserverDelay
