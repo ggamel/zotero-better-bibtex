@@ -20,7 +20,7 @@
     <meta property="article:tag" content="Scripting">
     <meta itemprop="name" content="Scripting :: Better BibTeX for Zotero">
     <meta itemprop="description" content="You wanted customized… You got customized. If you go into the Export tab of the Better BibTeX preferences, subtab postscript, you will find a text box (empty by default) where you can edit a javascript snippet which will be executed for each entry generated in the Bib(La)TeX exporter. In this code, you have access to the entry just before it will be written out and cached. There is an API to do this, and it’s fairly stable, but usually you can just open a new issue and ask me to write it, and I’ll add it here (it’s how the examples got here). Postscripts are available in 4 of the translators:">
-    <meta itemprop="wordCount" content="2497">
+    <meta itemprop="wordCount" content="2514">
     <meta itemprop="keywords" content="Scripting">
     <title>Scripting :: Better BibTeX for Zotero</title><link rel="icon" href="/zotero-better-bibtex/better-bibtex.ico" type="image/x-icon">
 
@@ -101,6 +101,7 @@
         <li><a href="#add-doi-in-note-field">Add DOI in note field</a></li>
         <li><a href="#add-arxiv-data">Add arXiv data</a></li>
         <li><a href="#custom-field-order">Custom field order</a></li>
+        <li><a href="#case-protect-italicized-text">Case-protect italicized text</a></li>
         <li><a href="#detect-and-protect-latex-math-formulas">Detect and protect LaTeX math formulas</a></li>
         <li><a href="#or-detect-and-protect-simple-latex-commands">Or, detect and protect (simple) LaTeX commands</a></li>
         <li><a href="#detect-and-protect-mathjax">Detect and protect MathJax</a></li>
@@ -901,6 +902,10 @@ the Zotero item looks like to the translator.</p>
 }
 </code></pre>
 <p>Further details <a href="https://github.com/retorquere/zotero-better-bibtex/issues/512" rel="external" target="_blank">Export to Biblatex/Bibtex. Custom field order. #512</a>.</p>
+<h3 id="case-protect-italicized-text">Case-protect italicized text</h3>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">Translator</span>.<span style="color:#a6e22e">BetterTeX</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">tex</span>.<span style="color:#a6e22e">has</span>.<span style="color:#a6e22e">title</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tex</span>.<span style="color:#a6e22e">add</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">zotero</span>.<span style="color:#a6e22e">title</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/(&lt;i&gt;)/ig</span>, <span style="color:#e6db74">&#39;&lt;span class=&#34;nocase&#34;&gt;$1&#39;</span>).<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/(&lt;[/]i&gt;)/ig</span>, <span style="color:#e6db74">&#39;$1&lt;/span&gt;&#39;</span>))
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 <h3 id="detect-and-protect-latex-math-formulas">Detect and protect LaTeX math formulas</h3>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">Translator</span>.<span style="color:#a6e22e">BetterTeX</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">tex</span>.<span style="color:#a6e22e">has</span>.<span style="color:#a6e22e">title</span>) {
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">tex</span>.<span style="color:#a6e22e">add</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">zotero</span>.<span style="color:#a6e22e">title</span>.<span style="color:#a6e22e">replace</span>(<span style="color:#e6db74">/(\$.*?\$)/g</span>, <span style="color:#e6db74">&#39;&lt;script&gt;{$1}&lt;/script&gt;&#39;</span>) });
