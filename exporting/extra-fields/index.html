@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.135.0">
-    <meta name="generator" content="Relearn 6.4.0+tip">
+    <meta name="generator" content="Hugo 0.136.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="In some cases the Zotero fields do not offer a place to enter the data you need to get your exported entries just right. For this Zotero has a so-called “cheater syntax” which allows you to add extra “fields” as separate lines in the extra field all items in Zotero have. These fields are supported by the citation processor inside Zotero, and BBT understands them too, and adds one “cheater syntax of its own.">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
@@ -30,7 +30,6 @@
     <link href="/zotero-better-bibtex/css/theme.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/theme-green.css" rel="stylesheet" id="R-variant-style">
     <link href="/zotero-better-bibtex/css/chroma-learn.css" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/zotero-better-bibtex/css/variant.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/print.css" rel="stylesheet" media="print">
     <script src="/zotero-better-bibtex/js/variant.js"></script>
     <script>
@@ -40,7 +39,6 @@
       window.relearn.absBaseUri='\/zotero-better-bibtex';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.index_js_url="/zotero-better-bibtex/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'green' ] );
       // translations
@@ -87,7 +85,8 @@
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
   <ul>
     <li><a href="#bbt-specific">BBT-specific</a></li>
     <li><a href="#labelvariable-list">Label/variable list</a></li>
@@ -103,7 +102,6 @@
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Extra fields</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-				
             <div class="topbar-button topbar-button-edit" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://github.com/retorquere/zotero-better-bibtex/edit/master/site/content/exporting/extra-fields.md" target="_blank" title="Edit (CTRL&#43;ALT&#43;w)"><i class="fa-fw fas fa-pen"></i></a>
             </div>
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/zotero-better-bibtex/exporting/scripting/index.html" title="Scripting (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -122,11 +120,11 @@
         </div>
       </nav>
       <div id="R-main-overlay"></div>
-      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+      <main id="R-body-inner" class="highlightable exporting" tabindex="-1">
         <div class="flex-block-wrapper">
-          <article class="default">
-            <header class="headline">
-            </header>
+<article class="default">
+  <header class="headline">
+  </header>
 
 <h1 id="extra-fields">Extra fields</h1>
 
@@ -176,738 +174,738 @@ of its own.</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">label</th>
-          <th style="text-align: left">type</th>
-          <th style="text-align: left">zotero/jurism</th>
-          <th style="text-align: left">csl</th>
+          <th>label</th>
+          <th>type</th>
+          <th>zotero/jurism</th>
+          <th>csl</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><strong>access date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">accessDate</td>
-          <td style="text-align: left">accessed</td>
+          <td><strong>access date</strong></td>
+          <td>date</td>
+          <td>accessDate</td>
+          <td>accessed</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>admin flag</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">adminFlag¹</td>
-          <td style="text-align: left">admin-flag¹</td>
+          <td><strong>admin flag</strong></td>
+          <td>text</td>
+          <td>adminFlag¹</td>
+          <td>admin-flag¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>adoption date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">adoptionDate¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>adoption date</strong></td>
+          <td>date</td>
+          <td>adoptionDate¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>application number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">applicationNumber</td>
-          <td style="text-align: left"></td>
+          <td><strong>application number</strong></td>
+          <td>text</td>
+          <td>applicationNumber</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>archive collection</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">archiveCollection¹</td>
-          <td style="text-align: left">archive_collection¹</td>
+          <td><strong>archive collection</strong></td>
+          <td>text</td>
+          <td>archiveCollection¹</td>
+          <td>archive_collection¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>archive id</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>archive id</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>archive location</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">archiveLocation</td>
-          <td style="text-align: left">archive_location</td>
+          <td><strong>archive location</strong></td>
+          <td>text</td>
+          <td>archiveLocation</td>
+          <td>archive_location</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>archive place</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">archive-place</td>
+          <td><strong>archive place</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>archive-place</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>artwork medium</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">medium</td>
-          <td style="text-align: left"></td>
+          <td><strong>artwork medium</strong></td>
+          <td>text</td>
+          <td>medium</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>artwork size</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">artworkSize</td>
-          <td style="text-align: left"></td>
+          <td><strong>artwork size</strong></td>
+          <td>text</td>
+          <td>artworkSize</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>assembly number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">assemblyNumber¹ / seriesNumber</td>
-          <td style="text-align: left"></td>
+          <td><strong>assembly number</strong></td>
+          <td>text</td>
+          <td>assemblyNumber¹ / seriesNumber</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>attorney agent</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">attorneyAgent</td>
-          <td style="text-align: left">attorneyAgent</td>
+          <td><strong>attorney agent</strong></td>
+          <td>name</td>
+          <td>attorneyAgent</td>
+          <td>attorneyAgent</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>audio file type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">medium</td>
-          <td style="text-align: left"></td>
+          <td><strong>audio file type</strong></td>
+          <td>text</td>
+          <td>medium</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>audio recording format</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">medium</td>
-          <td style="text-align: left"></td>
+          <td><strong>audio recording format</strong></td>
+          <td>text</td>
+          <td>medium</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>bill number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>bill number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>blog title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>blog title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>book abbreviation</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">journalAbbreviation</td>
-          <td style="text-align: left">container-title-short</td>
+          <td><strong>book abbreviation</strong></td>
+          <td>text</td>
+          <td>journalAbbreviation</td>
+          <td>container-title-short</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>book author</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">bookAuthor</td>
-          <td style="text-align: left">container-author</td>
+          <td><strong>book author</strong></td>
+          <td>name</td>
+          <td>bookAuthor</td>
+          <td>container-author</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>book title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>book title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>call number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">callNumber</td>
-          <td style="text-align: left">call-number</td>
+          <td><strong>call number</strong></td>
+          <td>text</td>
+          <td>callNumber</td>
+          <td>call-number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>case name</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">title</td>
-          <td style="text-align: left">title</td>
+          <td><strong>case name</strong></td>
+          <td>text</td>
+          <td>title</td>
+          <td>title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>cast member</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">castMember</td>
-          <td style="text-align: left">castMember</td>
+          <td><strong>cast member</strong></td>
+          <td>name</td>
+          <td>castMember</td>
+          <td>castMember</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>chapter number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">session</td>
-          <td style="text-align: left">chapter-number</td>
+          <td><strong>chapter number</strong></td>
+          <td>text</td>
+          <td>session</td>
+          <td>chapter-number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>citation key</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">citationKey²</td>
-          <td style="text-align: left"></td>
+          <td><strong>citation key</strong></td>
+          <td>text</td>
+          <td>citationKey²</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>code number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">codeNumber</td>
-          <td style="text-align: left"></td>
+          <td><strong>code number</strong></td>
+          <td>text</td>
+          <td>codeNumber</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>code pages</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">pages</td>
-          <td style="text-align: left">page</td>
+          <td><strong>code pages</strong></td>
+          <td>text</td>
+          <td>pages</td>
+          <td>page</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>code volume</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">volume</td>
-          <td style="text-align: left"></td>
+          <td><strong>code volume</strong></td>
+          <td>text</td>
+          <td>volume</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>collection editor</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">seriesEditor</td>
-          <td style="text-align: left">collection-editor</td>
+          <td><strong>collection editor</strong></td>
+          <td>name</td>
+          <td>seriesEditor</td>
+          <td>collection-editor</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>collection number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">assemblyNumber¹ / regnalYear¹ / seriesNumber / yearAsVolume¹</td>
-          <td style="text-align: left">collection-number</td>
+          <td><strong>collection number</strong></td>
+          <td>text</td>
+          <td>assemblyNumber¹ / regnalYear¹ / seriesNumber / yearAsVolume¹</td>
+          <td>collection-number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>collection title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">parentTreaty¹ / series / seriesTitle</td>
-          <td style="text-align: left">collection-title</td>
+          <td><strong>collection title</strong></td>
+          <td>text</td>
+          <td>parentTreaty¹ / series / seriesTitle</td>
+          <td>collection-title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>conference date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">conferenceDate¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>conference date</strong></td>
+          <td>date</td>
+          <td>conferenceDate¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>conference name</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">conferenceName</td>
-          <td style="text-align: left"></td>
+          <td><strong>conference name</strong></td>
+          <td>text</td>
+          <td>conferenceName</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>container author</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">bookAuthor</td>
-          <td style="text-align: left">container-author</td>
+          <td><strong>container author</strong></td>
+          <td>name</td>
+          <td>bookAuthor</td>
+          <td>container-author</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>container title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">code / publicationTitle / reporter</td>
-          <td style="text-align: left">container-title</td>
+          <td><strong>container title</strong></td>
+          <td>text</td>
+          <td>code / publicationTitle / reporter</td>
+          <td>container-title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>container title short</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">journalAbbreviation</td>
-          <td style="text-align: left">container-title-short</td>
+          <td><strong>container title short</strong></td>
+          <td>text</td>
+          <td>journalAbbreviation</td>
+          <td>container-title-short</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>csl type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">csl-type</td>
+          <td><strong>csl type</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>csl-type</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>date amended</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">dateAmended¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>date amended</strong></td>
+          <td>date</td>
+          <td>dateAmended¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>date decided</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">issued</td>
+          <td><strong>date decided</strong></td>
+          <td>date</td>
+          <td>date</td>
+          <td>issued</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>date enacted</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">issued</td>
+          <td><strong>date enacted</strong></td>
+          <td>date</td>
+          <td>date</td>
+          <td>issued</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>dictionary title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>dictionary title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>docket number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>docket number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>document name</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">documentName¹</td>
-          <td style="text-align: left">document-name¹</td>
+          <td><strong>document name</strong></td>
+          <td>text</td>
+          <td>documentName¹</td>
+          <td>document-name¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>document number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">documentNumber¹ / number</td>
-          <td style="text-align: left">document-number¹</td>
+          <td><strong>document number</strong></td>
+          <td>text</td>
+          <td>documentNumber¹ / number</td>
+          <td>document-number¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>editorial director</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">editorial-director</td>
+          <td><strong>editorial director</strong></td>
+          <td>name</td>
+          <td></td>
+          <td>editorial-director</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>encyclopedia title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>encyclopedia title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>episode number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>episode number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>event date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">conferenceDate¹ / dateAmended¹ / signingDate¹</td>
-          <td style="text-align: left">event-date</td>
+          <td><strong>event date</strong></td>
+          <td>date</td>
+          <td>conferenceDate¹ / dateAmended¹ / signingDate¹</td>
+          <td>event-date</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>event place</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">event-place</td>
+          <td><strong>event place</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>event-place</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>event title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">event-title²</td>
+          <td><strong>event title</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>event-title²</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>filing date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">filingDate</td>
-          <td style="text-align: left">submitted</td>
+          <td><strong>filing date</strong></td>
+          <td>date</td>
+          <td>filingDate</td>
+          <td>submitted</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>first page</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">pages</td>
-          <td style="text-align: left">page</td>
+          <td><strong>first page</strong></td>
+          <td>text</td>
+          <td>pages</td>
+          <td>page</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>forum title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>forum title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>gazette flag</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">gazetteFlag¹</td>
-          <td style="text-align: left">gazette-flag¹</td>
+          <td><strong>gazette flag</strong></td>
+          <td>text</td>
+          <td>gazetteFlag¹</td>
+          <td>gazette-flag¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>interview medium</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">medium</td>
-          <td style="text-align: left"></td>
+          <td><strong>interview medium</strong></td>
+          <td>text</td>
+          <td>medium</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>issue date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">issued</td>
+          <td><strong>issue date</strong></td>
+          <td>date</td>
+          <td>date</td>
+          <td>issued</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>issuing authority</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">authority² / issuingAuthority¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>issuing authority</strong></td>
+          <td>text</td>
+          <td>authority² / issuingAuthority¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>journal abbreviation</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">journalAbbreviation</td>
-          <td style="text-align: left">container-title-short</td>
+          <td><strong>journal abbreviation</strong></td>
+          <td>text</td>
+          <td>journalAbbreviation</td>
+          <td>container-title-short</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>legal status</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">legalStatus¹ / status</td>
-          <td style="text-align: left">status</td>
+          <td><strong>legal status</strong></td>
+          <td>text</td>
+          <td>legalStatus¹ / status</td>
+          <td>status</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>legislative body</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">authority² / legislativeBody¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>legislative body</strong></td>
+          <td>text</td>
+          <td>authority² / legislativeBody¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>letter type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>letter type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>library catalog</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">libraryCatalog</td>
-          <td style="text-align: left">source</td>
+          <td><strong>library catalog</strong></td>
+          <td>text</td>
+          <td>libraryCatalog</td>
+          <td>source</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>manuscript type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>manuscript type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>map type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>map type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>meeting name</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">meetingName</td>
-          <td style="text-align: left"></td>
+          <td><strong>meeting name</strong></td>
+          <td>text</td>
+          <td>meetingName</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>meeting number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">meetingNumber¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>meeting number</strong></td>
+          <td>text</td>
+          <td>meetingNumber¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>name of act</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">title</td>
-          <td style="text-align: left">title</td>
+          <td><strong>name of act</strong></td>
+          <td>text</td>
+          <td>title</td>
+          <td>title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>news case date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">newsCaseDate¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>news case date</strong></td>
+          <td>date</td>
+          <td>newsCaseDate¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>num pages</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">numPages</td>
-          <td style="text-align: left">number-of-pages</td>
+          <td><strong>num pages</strong></td>
+          <td>text</td>
+          <td>numPages</td>
+          <td>number-of-pages</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>number of pages</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">numPages</td>
-          <td style="text-align: left">number-of-pages</td>
+          <td><strong>number of pages</strong></td>
+          <td>text</td>
+          <td>numPages</td>
+          <td>number-of-pages</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>number of volumes</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">numberOfVolumes</td>
-          <td style="text-align: left">number-of-volumes</td>
+          <td><strong>number of volumes</strong></td>
+          <td>text</td>
+          <td>numberOfVolumes</td>
+          <td>number-of-volumes</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>opening date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">openingDate¹</td>
-          <td style="text-align: left">opening-date¹</td>
+          <td><strong>opening date</strong></td>
+          <td>date</td>
+          <td>openingDate¹</td>
+          <td>opening-date¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>original author</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">original-author</td>
+          <td><strong>original author</strong></td>
+          <td>name</td>
+          <td></td>
+          <td>original-author</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>original date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">originalDate¹</td>
-          <td style="text-align: left">original-date</td>
+          <td><strong>original date</strong></td>
+          <td>date</td>
+          <td>originalDate¹</td>
+          <td>original-date</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>original publisher</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">original-publisher</td>
+          <td><strong>original publisher</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>original-publisher</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>original publisher place</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">original-publisher-place</td>
+          <td><strong>original publisher place</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>original-publisher-place</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>original title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">original-title</td>
+          <td><strong>original title</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>original-title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>parent treaty</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">parentTreaty¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>parent treaty</strong></td>
+          <td>text</td>
+          <td>parentTreaty¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>patent number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>patent number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>post type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>post type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>presentation type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>presentation type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>priority date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">priorityDate¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>priority date</strong></td>
+          <td>date</td>
+          <td>priorityDate¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>priority numbers</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">priorityNumbers</td>
-          <td style="text-align: left"></td>
+          <td><strong>priority numbers</strong></td>
+          <td>text</td>
+          <td>priorityNumbers</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>proceedings title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>proceedings title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>program title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>program title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>programming language</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">programmingLanguage</td>
-          <td style="text-align: left"></td>
+          <td><strong>programming language</strong></td>
+          <td>text</td>
+          <td>programmingLanguage</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>public law number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>public law number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>publication date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">publicationDate¹</td>
-          <td style="text-align: left">publication-date¹</td>
+          <td><strong>publication date</strong></td>
+          <td>date</td>
+          <td>publicationDate¹</td>
+          <td>publication-date¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>publication number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationNumber¹</td>
-          <td style="text-align: left">publication-number¹</td>
+          <td><strong>publication number</strong></td>
+          <td>text</td>
+          <td>publicationNumber¹</td>
+          <td>publication-number¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>publication title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>publication title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>publisher place</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">publisher-place</td>
+          <td><strong>publisher place</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>publisher-place</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>regnal year</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">regnalYear¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>regnal year</strong></td>
+          <td>text</td>
+          <td>regnalYear¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>regulation type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">regulationType¹ / type</td>
-          <td style="text-align: left"></td>
+          <td><strong>regulation type</strong></td>
+          <td>text</td>
+          <td>regulationType¹ / type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>regulatory body</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">legislativeBody¹ / regulatoryBody¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>regulatory body</strong></td>
+          <td>text</td>
+          <td>legislativeBody¹ / regulatoryBody¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>report number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>report number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>report type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>report type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>reporter volume</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">volume</td>
-          <td style="text-align: left"></td>
+          <td><strong>reporter volume</strong></td>
+          <td>text</td>
+          <td>volume</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>repository location</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">place</td>
-          <td style="text-align: left">event-place / publisher-place</td>
+          <td><strong>repository location</strong></td>
+          <td>text</td>
+          <td>place</td>
+          <td>event-place / publisher-place</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>resolution label</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">resolutionLabel¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>resolution label</strong></td>
+          <td>text</td>
+          <td>resolutionLabel¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>reviewed author</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">reviewedAuthor</td>
-          <td style="text-align: left">reviewed-author</td>
+          <td><strong>reviewed author</strong></td>
+          <td>name</td>
+          <td>reviewedAuthor</td>
+          <td>reviewed-author</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>reviewed title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left"></td>
-          <td style="text-align: left">reviewed-title</td>
+          <td><strong>reviewed title</strong></td>
+          <td>text</td>
+          <td></td>
+          <td>reviewed-title</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>running time</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">runningTime</td>
-          <td style="text-align: left"></td>
+          <td><strong>running time</strong></td>
+          <td>text</td>
+          <td>runningTime</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>script writer</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">scriptwriter</td>
-          <td style="text-align: left">script-writer²</td>
+          <td><strong>script writer</strong></td>
+          <td>name</td>
+          <td>scriptwriter</td>
+          <td>script-writer²</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>series editor</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">seriesEditor</td>
-          <td style="text-align: left">collection-editor</td>
+          <td><strong>series editor</strong></td>
+          <td>name</td>
+          <td>seriesEditor</td>
+          <td>collection-editor</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>series number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">seriesNumber</td>
-          <td style="text-align: left"></td>
+          <td><strong>series number</strong></td>
+          <td>text</td>
+          <td>seriesNumber</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>series text</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">seriesText</td>
-          <td style="text-align: left"></td>
+          <td><strong>series text</strong></td>
+          <td>text</td>
+          <td>seriesText</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>series title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">seriesTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>series title</strong></td>
+          <td>text</td>
+          <td>seriesTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>session type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">sessionType¹ / type</td>
-          <td style="text-align: left"></td>
+          <td><strong>session type</strong></td>
+          <td>text</td>
+          <td>sessionType¹ / type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>short title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">shortTitle</td>
-          <td style="text-align: left">title-short</td>
+          <td><strong>short title</strong></td>
+          <td>text</td>
+          <td>shortTitle</td>
+          <td>title-short</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>signing date</strong></td>
-          <td style="text-align: left">date</td>
-          <td style="text-align: left">signingDate¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>signing date</strong></td>
+          <td>date</td>
+          <td>signingDate¹</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>supplement name</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">supplementName¹</td>
-          <td style="text-align: left">supplement¹</td>
+          <td><strong>supplement name</strong></td>
+          <td>text</td>
+          <td>supplementName¹</td>
+          <td>supplement¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>testimony by</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">testimonyBy¹</td>
-          <td style="text-align: left">testimonyBy¹</td>
+          <td><strong>testimony by</strong></td>
+          <td>name</td>
+          <td>testimonyBy¹</td>
+          <td>testimonyBy¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>thesis type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>thesis type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>title short</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">shortTitle</td>
-          <td style="text-align: left">title-short</td>
+          <td><strong>title short</strong></td>
+          <td>text</td>
+          <td>shortTitle</td>
+          <td>title-short</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>treaty number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">number</td>
-          <td style="text-align: left">number</td>
+          <td><strong>treaty number</strong></td>
+          <td>text</td>
+          <td>number</td>
+          <td>number</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>version number</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">versionNumber</td>
-          <td style="text-align: left">version</td>
+          <td><strong>version number</strong></td>
+          <td>text</td>
+          <td>versionNumber</td>
+          <td>version</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>video recording format</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">medium</td>
-          <td style="text-align: left"></td>
+          <td><strong>video recording format</strong></td>
+          <td>text</td>
+          <td>medium</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>volume title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">volumeTitle¹</td>
-          <td style="text-align: left">volume-title¹</td>
+          <td><strong>volume title</strong></td>
+          <td>text</td>
+          <td>volumeTitle¹</td>
+          <td>volume-title¹</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>website title</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">publicationTitle</td>
-          <td style="text-align: left"></td>
+          <td><strong>website title</strong></td>
+          <td>text</td>
+          <td>publicationTitle</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>website type</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">type</td>
-          <td style="text-align: left"></td>
+          <td><strong>website type</strong></td>
+          <td>text</td>
+          <td>type</td>
+          <td></td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>words by</strong></td>
-          <td style="text-align: left">name</td>
-          <td style="text-align: left">wordsBy</td>
-          <td style="text-align: left">wordsBy</td>
+          <td><strong>words by</strong></td>
+          <td>name</td>
+          <td>wordsBy</td>
+          <td>wordsBy</td>
       </tr>
       <tr>
-          <td style="text-align: left"><strong>year as volume</strong></td>
-          <td style="text-align: left">text</td>
-          <td style="text-align: left">yearAsVolume¹</td>
-          <td style="text-align: left"></td>
+          <td><strong>year as volume</strong></td>
+          <td>text</td>
+          <td>yearAsVolume¹</td>
+          <td></td>
       </tr>
   </tbody>
 </table>
@@ -929,9 +927,9 @@ of its own.</p>
 <p>alchemy = new Alchemy(config)
 </script></p>
 
-            <footer class="footline">
-            </footer>
-          </article>
+  <footer class="footline">
+  </footer>
+</article>
         </div>
       </main>
     </div>
@@ -1550,15 +1548,17 @@ Better BibTeX for Zotero
 </a>
 
         </div>
-
-        <search>
+        <script>
+          window.index_js_url="/zotero-better-bibtex/searchindex.js";
+        </script>
+        <search><form action="/zotero-better-bibtex/search/index.html" method="get">
           <div class="searchbox default-animation">
-            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
             <label class="a11y-only" for="R-search-by">Search</label>
             <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
-        </search>
+        </form></search>
         <script>
           var contentLangs=['en'];
         </script>
@@ -1578,33 +1578,19 @@ Better BibTeX for Zotero
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/index.html" class="alwaysopen"><a class="padding" href="/zotero-better-bibtex/installation/preferences/index.html">Citation keys</a><ul id="R-subsections-07a6c8e08813a09c146c7aa0a82d137b" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/export/index.html">Export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/automatic-export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/automatic-export/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/import/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/import/index.html">Import</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html">Miscellaneous</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html">Hidden preferences</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/bundled-translators/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/bundled-translators/index.html">Bundled translators</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/index.html" class="parent "><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/exporting/auto/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pull/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html" class="active"><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/citing/cayw/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/cayw/index.html">Cite as you Write</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/migrating/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/migrating/index.html">Migrating from Word/Libreoffice</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/aux-scanner/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/aux-scanner/index.html">AUX Scanner</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/support/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/support/faq/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/faq/index.html">FAQ</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/performance/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/performance/index.html">Performance</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/translations/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/translations/index.html">Translations</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/tests/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/tests/index.html">Testing</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/sponsoring/index.html" class=""><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/installation/index.html"><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/zotero-better-bibtex/exporting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="collapsible-menu">
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/auto/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/pull/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
+            <li class="active " data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/citing/index.html"><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/support/index.html"><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/sponsoring/index.html"><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
           </ul>
         </div>
         <div id="R-shortcuts">

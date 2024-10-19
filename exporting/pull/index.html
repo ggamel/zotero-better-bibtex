@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.135.0">
-    <meta name="generator" content="Relearn 6.4.0+tip">
+    <meta name="generator" content="Hugo 0.136.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="You can fetch your bibliography on the url http://127.0.0.1:23119/better-bibtex/collection?[collectionID].[format] 1. You can get this URL for a group, library or collection by right-clicking it and selecting Download Better BibTeX export...
 You can add options to the export as URL parameters:
 &amp;exportNotes=[true|false] &amp;useJournalAbbreviation=[true|false] You can fetch your library as part of your build, using something like curl from your Makefile, or with a BibLaTeX remote statement like
@@ -44,7 +44,6 @@ You can add options to the export as URL parameters:
     <link href="/zotero-better-bibtex/css/theme.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/theme-green.css" rel="stylesheet" id="R-variant-style">
     <link href="/zotero-better-bibtex/css/chroma-learn.css" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/zotero-better-bibtex/css/variant.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/print.css" rel="stylesheet" media="print">
     <script src="/zotero-better-bibtex/js/variant.js"></script>
     <script>
@@ -54,7 +53,6 @@ You can add options to the export as URL parameters:
       window.relearn.absBaseUri='\/zotero-better-bibtex';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.index_js_url="/zotero-better-bibtex/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'green' ] );
       // translations
@@ -110,7 +108,6 @@ You can add options to the export as URL parameters:
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Pull export</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-				
             <div class="topbar-button topbar-button-edit" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://github.com/retorquere/zotero-better-bibtex/edit/master/site/content/exporting/pull.md" target="_blank" title="Edit (CTRL&#43;ALT&#43;w)"><i class="fa-fw fas fa-pen"></i></a>
             </div>
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/zotero-better-bibtex/exporting/pandoc/index.html" title="Markdown/Pandoc (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -129,16 +126,16 @@ You can add options to the export as URL parameters:
         </div>
       </nav>
       <div id="R-main-overlay"></div>
-      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+      <main id="R-body-inner" class="highlightable exporting" tabindex="-1">
         <div class="flex-block-wrapper">
-          <article class="default">
-            <header class="headline">
-<div class=" taxonomy-tags term-list cstyle  tags" title="Tags" style="--VARIABLE-TAGS-BG-color: var(--INTERNAL-TAG-BG-color);">
+<article class="default">
+  <header class="headline">
+<div class="R-taxonomy taxonomy-tags cstyle tags" title="Tags" style="--VARIABLE-TAGS-BG-color: var(--INTERNAL-TAG-BG-color);">
   <ul>
     <li><a class="term-link" href="/zotero-better-bibtex/tags/export/index.html">Export</a></li>
   </ul>
 </div>
-            </header>
+  </header>
 
 <h1 id="pull-export">Pull export</h1>
 
@@ -173,9 +170,9 @@ even more arcane to set up than <a href="/zotero-better-bibtex/exporting/auto/#g
 </ol>
 </div>
 
-            <footer class="footline">
-            </footer>
-          </article>
+  <footer class="footline">
+  </footer>
+</article>
         </div>
       </main>
     </div>
@@ -794,15 +791,17 @@ Better BibTeX for Zotero
 </a>
 
         </div>
-
-        <search>
+        <script>
+          window.index_js_url="/zotero-better-bibtex/searchindex.js";
+        </script>
+        <search><form action="/zotero-better-bibtex/search/index.html" method="get">
           <div class="searchbox default-animation">
-            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
             <label class="a11y-only" for="R-search-by">Search</label>
             <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
-        </search>
+        </form></search>
         <script>
           var contentLangs=['en'];
         </script>
@@ -822,33 +821,19 @@ Better BibTeX for Zotero
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/index.html" class="alwaysopen"><a class="padding" href="/zotero-better-bibtex/installation/preferences/index.html">Citation keys</a><ul id="R-subsections-07a6c8e08813a09c146c7aa0a82d137b" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/export/index.html">Export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/automatic-export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/automatic-export/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/import/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/import/index.html">Import</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html">Miscellaneous</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html">Hidden preferences</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/bundled-translators/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/bundled-translators/index.html">Bundled translators</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/index.html" class="parent "><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/exporting/auto/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pull/index.html" class="active"><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/citing/cayw/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/cayw/index.html">Cite as you Write</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/migrating/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/migrating/index.html">Migrating from Word/Libreoffice</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/aux-scanner/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/aux-scanner/index.html">AUX Scanner</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/support/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/support/faq/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/faq/index.html">FAQ</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/performance/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/performance/index.html">Performance</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/translations/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/translations/index.html">Translations</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/tests/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/tests/index.html">Testing</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/sponsoring/index.html" class=""><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/installation/index.html"><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/zotero-better-bibtex/exporting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="collapsible-menu">
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/auto/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
+            <li class="active " data-nav-id="/zotero-better-bibtex/exporting/pull/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/citing/index.html"><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/support/index.html"><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/sponsoring/index.html"><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
           </ul>
         </div>
         <div id="R-shortcuts">

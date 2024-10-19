@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.135.0">
-    <meta name="generator" content="Relearn 6.4.0+tip">
+    <meta name="generator" content="Hugo 0.136.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="Install by downloading the latest release – if you use Firefox, make sure to right-click and save the XPI file, not just clicking it – and then in Zotero:
 In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the gear in the top-right corner and choose ‘Install Add-on From File…’ Choose .xpi that you’ve just downloaded, click ‘Install’ If you’re using Zotero 6, restart Zotero. Installation in Zotero 7 requires no restart. After the initial installation, the plugin will auto-update to newer releases, so you should need to perform the process described here only once.">
     <meta name="author" content="">
@@ -34,7 +34,6 @@ In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the g
     <link href="/zotero-better-bibtex/css/theme.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/theme-green.css" rel="stylesheet" id="R-variant-style">
     <link href="/zotero-better-bibtex/css/chroma-learn.css" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/zotero-better-bibtex/css/variant.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/print.css" rel="stylesheet" media="print">
     <script src="/zotero-better-bibtex/js/variant.js"></script>
     <script>
@@ -44,7 +43,6 @@ In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the g
       window.relearn.absBaseUri='\/zotero-better-bibtex';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.index_js_url="/zotero-better-bibtex/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'green' ] );
       // translations
@@ -99,12 +97,11 @@ In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the g
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Installation</span><meta itemprop="position" content="2"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-				
             <div class="topbar-button topbar-button-edit" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://github.com/retorquere/zotero-better-bibtex/edit/master/site/content/installation/_index.md" target="_blank" title="Edit (CTRL&#43;ALT&#43;w)"><i class="fa-fw fas fa-pen"></i></a>
             </div>
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><span class="topbar-control"><i class="fa-fw fas fa-chevron-left"></i></span>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/zotero-better-bibtex/index.html" title="Better BibTeX for Zotero (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
-            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><span class="topbar-control"><i class="fa-fw fas fa-chevron-right"></i></span>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/zotero-better-bibtex/installation/preferences/index.html" title="Citation keys (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
             </div>
             <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
               <div class="topbar-content">
@@ -118,11 +115,15 @@ In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the g
         </div>
       </nav>
       <div id="R-main-overlay"></div>
-      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+      <main id="R-body-inner" class="highlightable installation" tabindex="-1">
         <div class="flex-block-wrapper">
-  
+<article class="default">
+  <header class="headline">
+  </header>
 
-  <p>Install by downloading the <a href="https://github.com/retorquere/zotero-better-bibtex/releases/latest" rel="external" target="_blank">latest release</a> &ndash; if you use Firefox, make sure to right-click and save the XPI file, not just clicking it &ndash; and then in Zotero:</p>
+<h1 id="installation">Installation</h1>
+
+<p>Install by downloading the <a href="https://github.com/retorquere/zotero-better-bibtex/releases/latest" rel="external" target="_blank">latest release</a> &ndash; if you use Firefox, make sure to right-click and save the XPI file, not just clicking it &ndash; and then in Zotero:</p>
 <ol>
 <li>In the main menu go to Tools &gt; Add-ons</li>
 <li>Select &lsquo;Extensions&rsquo;</li>
@@ -134,14 +135,9 @@ In the main menu go to Tools &gt; Add-ons Select ‘Extensions’ Click on the g
 <p><strong>Note</strong>: the default setting of BBT will generate different citekeys than Zotero would itself generate; the keys from Zotero are not always safe for use in bibtex/biber. If you want to get the stock zotero keys, set the pattern in the preferences to <code>zotero</code>. I very much recommend <em>not</em> choosing <code>zotero</code> as your pattern unless you have existing articles that use keys generated by previous Zotero-native BibTeX export.</p>
 <p><strong>Note</strong>: BBT needs to be installed in Zotero, <em>not</em> Firefox. There used to be two versions of Zotero, one standalone, and one that was installed in Firefox. BBT is a <em>Zotero</em> extension and lives where Zotero lives; Zotero is <a href="https://www.zotero.org/blog/zotero-5-and-firefox-faq/" rel="external" target="_blank">no longer available</a> as a Firefox plugin, only as standalone. If you download BBT using Firefox by simply (left)clicking on it, Firefox will download it, think it is a Firefox plugin, try to install it, and will fail with a complaint it is corrupt, hence the right-click and save.</p>
 
-
-
-
-
-<footer class=" footline" >
-  
-</footer>
-
+  <footer class="footline">
+  </footer>
+</article>
         </div>
       </main>
     </div>
@@ -760,15 +756,17 @@ Better BibTeX for Zotero
 </a>
 
         </div>
-
-        <search>
+        <script>
+          window.index_js_url="/zotero-better-bibtex/searchindex.js";
+        </script>
+        <search><form action="/zotero-better-bibtex/search/index.html" method="get">
           <div class="searchbox default-animation">
-            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
             <label class="a11y-only" for="R-search-by">Search</label>
             <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
-        </search>
+        </form></search>
         <script>
           var contentLangs=['en'];
         </script>
@@ -788,33 +786,13 @@ Better BibTeX for Zotero
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/index.html" class="active parent "><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/index.html" class="alwaysopen"><a class="padding" href="/zotero-better-bibtex/installation/preferences/index.html">Citation keys</a><ul id="R-subsections-07a6c8e08813a09c146c7aa0a82d137b" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/export/index.html">Export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/automatic-export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/automatic-export/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/import/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/import/index.html">Import</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html">Miscellaneous</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html">Hidden preferences</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/bundled-translators/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/bundled-translators/index.html">Bundled translators</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/exporting/auto/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pull/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/citing/cayw/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/cayw/index.html">Cite as you Write</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/migrating/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/migrating/index.html">Migrating from Word/Libreoffice</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/aux-scanner/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/aux-scanner/index.html">AUX Scanner</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/support/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/support/faq/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/faq/index.html">FAQ</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/performance/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/performance/index.html">Performance</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/translations/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/translations/index.html">Translations</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/tests/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/tests/index.html">Testing</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/sponsoring/index.html" class=""><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
+            <li class="active parent " data-nav-id="/zotero-better-bibtex/installation/index.html"><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="collapsible-menu">
+            <li class="alwaysopen " data-nav-id="/zotero-better-bibtex/installation/preferences/index.html"><a class="padding" href="/zotero-better-bibtex/installation/preferences/index.html">Citation keys</a><ul id="R-subsections-07a6c8e08813a09c146c7aa0a82d137b" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/installation/bundled-translators/index.html"><a class="padding" href="/zotero-better-bibtex/installation/bundled-translators/index.html">Bundled translators</a></li></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/citing/index.html"><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/support/index.html"><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/sponsoring/index.html"><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
@@ -1009,6 +987,3 @@ Better BibTeX for Zotero
     <script src="/zotero-better-bibtex/js/theme.js" defer></script>
   </body>
 </html>
-
-
-

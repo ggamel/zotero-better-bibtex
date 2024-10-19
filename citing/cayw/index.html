@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.135.0">
-    <meta name="generator" content="Relearn 6.4.0+tip">
+    <meta name="generator" content="Hugo 0.136.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="PSA: as of Zotero 5.0.71, access to the CAYW URL will no longer work from the browser for security reasons; curl and other programmatic access such as from editors access will work.
 Good news for TeXnicians and those down with Mark (aka Markdown, RST, whatnot): this is the time to go pester the author of your favorite editor for Zotero integration!
 Editor integration vim Graciously supplied by David Lukes:
@@ -46,7 +46,6 @@ paste it in your .vimrc (and modify to your liking):">
     <link href="/zotero-better-bibtex/css/theme.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/theme-green.css" rel="stylesheet" id="R-variant-style">
     <link href="/zotero-better-bibtex/css/chroma-learn.css" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/zotero-better-bibtex/css/variant.css" rel="stylesheet">
     <link href="/zotero-better-bibtex/css/print.css" rel="stylesheet" media="print">
     <script src="/zotero-better-bibtex/js/variant.js"></script>
     <script>
@@ -56,7 +55,6 @@ paste it in your .vimrc (and modify to your liking):">
       window.relearn.absBaseUri='\/zotero-better-bibtex';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      window.index_js_url="/zotero-better-bibtex/index.search.js";
       // variant stuff
       window.variants && variants.init( [ 'green' ] );
       // translations
@@ -101,7 +99,8 @@ paste it in your .vimrc (and modify to your liking):">
             </div>
             <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
               <div class="topbar-content">
-                <div class="topbar-content-wrapper"><nav class="TableOfContents">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
   <ul>
     <li><a href="#editor-integration">Editor integration</a>
       <ul>
@@ -128,7 +127,6 @@ paste it in your .vimrc (and modify to your liking):">
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Cite as you Write</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-				
             <div class="topbar-button topbar-button-edit" data-content-empty="disable" data-width-s="area-more" data-width-m="show" data-width-l="show"><a class="topbar-control" href="https://github.com/retorquere/zotero-better-bibtex/edit/master/site/content/citing/cayw.md" target="_blank" title="Edit (CTRL&#43;ALT&#43;w)"><i class="fa-fw fas fa-pen"></i></a>
             </div>
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/zotero-better-bibtex/citing/index.html" title="Citation Keys (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -147,18 +145,18 @@ paste it in your .vimrc (and modify to your liking):">
         </div>
       </nav>
       <div id="R-main-overlay"></div>
-      <main id="R-body-inner" class="highlightable default" tabindex="-1">
+      <main id="R-body-inner" class="highlightable citing" tabindex="-1">
         <div class="flex-block-wrapper">
-          <article class="default">
-            <header class="headline">
-<div class=" taxonomy-tags term-list cstyle  tags" title="Tags" style="--VARIABLE-TAGS-BG-color: var(--INTERNAL-TAG-BG-color);">
+<article class="default">
+  <header class="headline">
+<div class="R-taxonomy taxonomy-tags cstyle tags" title="Tags" style="--VARIABLE-TAGS-BG-color: var(--INTERNAL-TAG-BG-color);">
   <ul>
     <li><a class="term-link" href="/zotero-better-bibtex/tags/citation-keys/index.html">Citation Keys</a></li>
     <li><a class="term-link" href="/zotero-better-bibtex/tags/cite-as-you-write/index.html">Cite as You Write</a></li>
     <li><a class="term-link" href="/zotero-better-bibtex/tags/overleaf/index.html">Overleaf</a></li>
   </ul>
 </div>
-            </header>
+  </header>
 
 <h1 id="cite-as-you-write">Cite as you Write</h1>
 
@@ -226,38 +224,38 @@ the following URL parameters:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">parameter</th>
-          <th style="text-align: left"></th>
+          <th>parameter</th>
+          <th></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>probe</code></td>
-          <td style="text-align: left">If set to any non-empty value, returns <code>ready</code>. You can use this to test whether BBT CAYW picking is live; it will not pop up the picker</td>
+          <td><code>probe</code></td>
+          <td>If set to any non-empty value, returns <code>ready</code>. You can use this to test whether BBT CAYW picking is live; it will not pop up the picker</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>format</code></td>
-          <td style="text-align: left">Set the output format</td>
+          <td><code>format</code></td>
+          <td>Set the output format</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>clipboard</code></td>
-          <td style="text-align: left">Any non-empty value will copy the results to the clipboard</td>
+          <td><code>clipboard</code></td>
+          <td>Any non-empty value will copy the results to the clipboard</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>minimize</code></td>
-          <td style="text-align: left">Any non-empty value will minimize Zotero windows after a pick</td>
+          <td><code>minimize</code></td>
+          <td>Any non-empty value will minimize Zotero windows after a pick</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>texstudio</code></td>
-          <td style="text-align: left">Any non-empty value will try to push the pick to TeXstudio</td>
+          <td><code>texstudio</code></td>
+          <td>Any non-empty value will try to push the pick to TeXstudio</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>selected</code></td>
-          <td style="text-align: left">Any non-empty value will use the current selection in Zotero rather than popping up the pick window</td>
+          <td><code>selected</code></td>
+          <td>Any non-empty value will use the current selection in Zotero rather than popping up the pick window</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>select</code></td>
-          <td style="text-align: left">More of a gimmick than anything else, but if you add select=true, BBT will select the picked items in Zotero.</td>
+          <td><code>select</code></td>
+          <td>More of a gimmick than anything else, but if you add select=true, BBT will select the picked items in Zotero.</td>
       </tr>
   </tbody>
 </table>
@@ -302,26 +300,26 @@ the following URL parameters:</p>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">field</th>
-          <th style="text-align: left"></th>
+          <th>field</th>
+          <th></th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left"><code>locator</code></td>
-          <td style="text-align: left">the place within the work (e.g. page number)</td>
+          <td><code>locator</code></td>
+          <td>the place within the work (e.g. page number)</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>prefix</code></td>
-          <td style="text-align: left">for stuff like &ldquo;see &hellip;&rdquo;</td>
+          <td><code>prefix</code></td>
+          <td>for stuff like &ldquo;see &hellip;&rdquo;</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>suffix</code></td>
-          <td style="text-align: left">for stuff after the citations</td>
+          <td><code>suffix</code></td>
+          <td>for stuff after the citations</td>
       </tr>
       <tr>
-          <td style="text-align: left"><code>suppress author</code></td>
-          <td style="text-align: left">if you only want the year</td>
+          <td><code>suppress author</code></td>
+          <td>if you only want the year</td>
       </tr>
   </tbody>
 </table>
@@ -342,98 +340,98 @@ command is generated</li>
 <table>
   <thead>
       <tr>
-          <th style="text-align: left">locator label</th>
-          <th style="text-align: left">abbreviation</th>
+          <th>locator label</th>
+          <th>abbreviation</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td style="text-align: left">article</td>
-          <td style="text-align: left">art.</td>
+          <td>article</td>
+          <td>art.</td>
       </tr>
       <tr>
-          <td style="text-align: left">chapter</td>
-          <td style="text-align: left">ch.</td>
+          <td>chapter</td>
+          <td>ch.</td>
       </tr>
       <tr>
-          <td style="text-align: left">subchapter</td>
-          <td style="text-align: left">subch.</td>
+          <td>subchapter</td>
+          <td>subch.</td>
       </tr>
       <tr>
-          <td style="text-align: left">column</td>
-          <td style="text-align: left">col.</td>
+          <td>column</td>
+          <td>col.</td>
       </tr>
       <tr>
-          <td style="text-align: left">figure</td>
-          <td style="text-align: left">fig.</td>
+          <td>figure</td>
+          <td>fig.</td>
       </tr>
       <tr>
-          <td style="text-align: left">line</td>
-          <td style="text-align: left">l.</td>
+          <td>line</td>
+          <td>l.</td>
       </tr>
       <tr>
-          <td style="text-align: left">note</td>
-          <td style="text-align: left">n.</td>
+          <td>note</td>
+          <td>n.</td>
       </tr>
       <tr>
-          <td style="text-align: left">issue</td>
-          <td style="text-align: left">no.</td>
+          <td>issue</td>
+          <td>no.</td>
       </tr>
       <tr>
-          <td style="text-align: left">opus</td>
-          <td style="text-align: left">op.</td>
+          <td>opus</td>
+          <td>op.</td>
       </tr>
       <tr>
-          <td style="text-align: left">page</td>
-          <td style="text-align: left">p.</td>
+          <td>page</td>
+          <td>p.</td>
       </tr>
       <tr>
-          <td style="text-align: left">paragraph</td>
-          <td style="text-align: left">para.</td>
+          <td>paragraph</td>
+          <td>para.</td>
       </tr>
       <tr>
-          <td style="text-align: left">subparagraph</td>
-          <td style="text-align: left">subpara.</td>
+          <td>subparagraph</td>
+          <td>subpara.</td>
       </tr>
       <tr>
-          <td style="text-align: left">part</td>
-          <td style="text-align: left">pt.</td>
+          <td>part</td>
+          <td>pt.</td>
       </tr>
       <tr>
-          <td style="text-align: left">rule</td>
-          <td style="text-align: left">r.</td>
+          <td>rule</td>
+          <td>r.</td>
       </tr>
       <tr>
-          <td style="text-align: left">section</td>
-          <td style="text-align: left">sec.</td>
+          <td>section</td>
+          <td>sec.</td>
       </tr>
       <tr>
-          <td style="text-align: left">subsection</td>
-          <td style="text-align: left">subsec.</td>
+          <td>subsection</td>
+          <td>subsec.</td>
       </tr>
       <tr>
-          <td style="text-align: left">Section</td>
-          <td style="text-align: left">Sec.</td>
+          <td>Section</td>
+          <td>Sec.</td>
       </tr>
       <tr>
-          <td style="text-align: left">sub verbo</td>
-          <td style="text-align: left">sv.</td>
+          <td>sub verbo</td>
+          <td>sv.</td>
       </tr>
       <tr>
-          <td style="text-align: left">schedule</td>
-          <td style="text-align: left">sch.</td>
+          <td>schedule</td>
+          <td>sch.</td>
       </tr>
       <tr>
-          <td style="text-align: left">title</td>
-          <td style="text-align: left">tit.</td>
+          <td>title</td>
+          <td>tit.</td>
       </tr>
       <tr>
-          <td style="text-align: left">verse</td>
-          <td style="text-align: left">vrs.</td>
+          <td>verse</td>
+          <td>vrs.</td>
       </tr>
       <tr>
-          <td style="text-align: left">volume</td>
-          <td style="text-align: left">vol.</td>
+          <td>volume</td>
+          <td>vol.</td>
       </tr>
   </tbody>
 </table>
@@ -456,9 +454,9 @@ do the job, and for Linux <a href="https://unix.stackexchange.com/questions/4467
 </ol>
 </div>
 
-            <footer class="footline">
-            </footer>
-          </article>
+  <footer class="footline">
+  </footer>
+</article>
         </div>
       </main>
     </div>
@@ -1077,15 +1075,17 @@ Better BibTeX for Zotero
 </a>
 
         </div>
-
-        <search>
+        <script>
+          window.index_js_url="/zotero-better-bibtex/searchindex.js";
+        </script>
+        <search><form action="/zotero-better-bibtex/search/index.html" method="get">
           <div class="searchbox default-animation">
-            <i class="fas fa-search" title="Search (CTRL+ALT+f)"></i>
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
             <label class="a11y-only" for="R-search-by">Search</label>
             <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
-        </search>
+        </form></search>
         <script>
           var contentLangs=['en'];
         </script>
@@ -1105,33 +1105,14 @@ Better BibTeX for Zotero
       <div id="R-content-wrapper" class="highlightable">
         <div id="R-topics">
           <ul class="enlarge morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/index.html" class="alwaysopen"><a class="padding" href="/zotero-better-bibtex/installation/preferences/index.html">Citation keys</a><ul id="R-subsections-07a6c8e08813a09c146c7aa0a82d137b" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/export/index.html">Export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/automatic-export/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/automatic-export/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/import/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/import/index.html">Import</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/miscellaneous/index.html">Miscellaneous</a></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/preferences/hidden-preferences/index.html">Hidden preferences</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/installation/bundled-translators/index.html" class=""><a class="padding" href="/zotero-better-bibtex/installation/bundled-translators/index.html">Bundled translators</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/exporting/auto/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/auto/index.html">Automatic export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pandoc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pandoc/index.html">Markdown/Pandoc</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/pull/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/pull/index.html">Pull export</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/scripting/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/scripting/index.html">Scripting</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/extra-fields/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/extra-fields/index.html">Extra fields</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/unicode/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/unicode/index.html">Unicode</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/advanced/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/advanced/index.html">Advanced</a></li>
-          <li data-nav-id="/zotero-better-bibtex/exporting/json-rpc/index.html" class=""><a class="padding" href="/zotero-better-bibtex/exporting/json-rpc/index.html">JSON-RPC</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/index.html" class="parent "><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/citing/cayw/index.html" class="active"><a class="padding" href="/zotero-better-bibtex/citing/cayw/index.html">Cite as you Write</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/migrating/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/migrating/index.html">Migrating from Word/Libreoffice</a></li>
-          <li data-nav-id="/zotero-better-bibtex/citing/aux-scanner/index.html" class=""><a class="padding" href="/zotero-better-bibtex/citing/aux-scanner/index.html">AUX Scanner</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/support/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="morespace collapsible-menu">
-          <li data-nav-id="/zotero-better-bibtex/support/faq/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/faq/index.html">FAQ</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/performance/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/performance/index.html">Performance</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/translations/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/translations/index.html">Translations</a></li>
-          <li data-nav-id="/zotero-better-bibtex/support/tests/index.html" class=""><a class="padding" href="/zotero-better-bibtex/support/tests/index.html">Testing</a></li></ul></li>
-          <li data-nav-id="/zotero-better-bibtex/sponsoring/index.html" class=""><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/installation/index.html"><a class="padding" href="/zotero-better-bibtex/installation/index.html">Installation</a><ul id="R-subsections-d532c08ef757367cd12653650690f4a3" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/exporting/index.html"><a class="padding" href="/zotero-better-bibtex/exporting/index.html">Exporting</a><ul id="R-subsections-ccbfef0939177a0a2b8297df8f2158ce" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/zotero-better-bibtex/citing/index.html"><a class="padding" href="/zotero-better-bibtex/citing/index.html">Citation Keys</a><ul id="R-subsections-55a232ca11bcab86c5514fe9029a8582" class="collapsible-menu">
+            <li class="active " data-nav-id="/zotero-better-bibtex/citing/cayw/index.html"><a class="padding" href="/zotero-better-bibtex/citing/cayw/index.html">Cite as you Write</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/citing/migrating/index.html"><a class="padding" href="/zotero-better-bibtex/citing/migrating/index.html">Migrating from Word/Libreoffice</a></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/citing/aux-scanner/index.html"><a class="padding" href="/zotero-better-bibtex/citing/aux-scanner/index.html">AUX Scanner</a></li></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/support/index.html"><a class="padding" href="/zotero-better-bibtex/support/index.html">Support</a><ul id="R-subsections-b3cd3b8035227c23ad0ddf3b55c690ed" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/zotero-better-bibtex/sponsoring/index.html"><a class="padding" href="/zotero-better-bibtex/sponsoring/index.html">Sponsoring BBT</a></li>
           </ul>
         </div>
         <div id="R-shortcuts">
