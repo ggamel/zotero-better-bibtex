@@ -198,6 +198,7 @@ export const KeyManager = new class _KeyManager {
     }
 
     // clear before refresh so they can update without hitting "claimed keys" in the deleted set
+    const old = blink.many(this.keys, { where: { itemID: { in: ids }}})
     this.clear(ids)
 
     const updates: ZoteroItem[] = []
@@ -207,20 +208,19 @@ export const KeyManager = new class _KeyManager {
 
       const extra = item.getField('extra')
 
-      const citationKey = {
-        old: Extra.get(extra, 'zotero', { citationKey: true }).extraFields.citationKey,
-        new: '',
+      let citationKey: string
+      if (citationKey = Extra.get(extra, 'zotero', { citationKey: true }).extraFields.citationKey) {
+        log.debug('3038: not refreshing pinned', citationKey)
+        continue
       }
-      if (citationKey.old) continue // pinned, leave it alone
 
-      citationKey.old = this.get(item.id).citationKey
-      citationKey.new = this.update(item)
-      if (citationKey.old === citationKey.new) continue
+      citationKey = this.update(item)
+      log.debug('3038: refreshed', old.find(ck => ck.itemID === item.id), '=>', citationKey)
 
       // remove the new citekey from the aliases if present
       const aliases = Extra.get(extra, 'zotero', { aliases: true })
-      if (aliases.extraFields.aliases.includes(citationKey.new)) {
-        aliases.extraFields.aliases = aliases.extraFields.aliases.filter(alias => alias !== citationKey.new)
+      if (aliases.extraFields.aliases.includes(citationKey)) {
+        aliases.extraFields.aliases = aliases.extraFields.aliases.filter(alias => alias !== citationKey)
 
         if (aliases.extraFields.aliases.length) {
           item.setField('extra', Extra.set(aliases.extra, { aliases: aliases.extraFields.aliases }))
