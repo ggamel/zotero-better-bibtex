@@ -32,7 +32,7 @@ You can add options to the export as URL parameters:
 You can add options to the export as URL parameters:
 &amp;exportNotes=[true|false] &amp;useJournalAbbreviation=[true|false] You can fetch your library as part of your build, using something like curl from your Makefile, or with a BibLaTeX remote statement like
 \addbibresource[location=remote]{http://127.0.0.1:23119/better-bibtex/collection?/0/8CV58ZVD.biblatex} format can be:">
-    <meta itemprop="wordCount" content="196">
+    <meta itemprop="wordCount" content="200">
     <meta itemprop="keywords" content="Export">
     <title>Pull export :: Better BibTeX for Zotero</title><link rel="icon" href="/zotero-better-bibtex/better-bibtex.ico" type="image/x-icon">
 
@@ -149,14 +149,14 @@ You can add options to the export as URL parameters:
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tex" data-lang="tex"><span style="display:flex;"><span><span style="color:#66d9ef">\addbibresource</span><span style="color:#a6e22e">[location=remote]</span>{http://127.0.0.1:23119/better-bibtex/collection?/0/8CV58ZVD.biblatex}</span></span></code></pre></div>
 <p><code>format</code> can be:</p>
 <ul>
-<li><code>biblatex</code> for BibLaTeX</li>
+<li><code>bib</code> of <code>biblatex</code> for BibLaTeX</li>
 <li><code>bibtex</code> for BibTeX</li>
 <li><code>json</code> or <code>csljson</code> for CSL-JSON</li>
 <li><code>yaml</code>, <code>yml</code> or <code>cslyaml</code> for CSL-JSON in YAML format</li>
 <li><code>jzon</code> for BetterBibTeX JSON debug format</li>
 <li>the value of <code>translatorID</code> taken from the header of any existing Zotero translator to get an export in that translator format</li>
 </ul>
-<p><strong>Pull export will <em>only</em> work if you are compiling your document on the
+<p><strong><code>addbibresource</code> from pull export will <em>only</em> work if you are compiling your document on the
 same system your Zotero client with BBT runs on</strong>. <em>Technically</em>
 it can be made to work for pulling from other systems, but it&rsquo;s
 even more arcane to set up than <a href="/zotero-better-bibtex/exporting/auto/#git-support">git support</a>.</p>
